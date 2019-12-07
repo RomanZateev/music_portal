@@ -14,15 +14,16 @@ class CreateSongsOfSingersTable extends Migration
     public function up()
     {
         Schema::create('songs_of_singers', function (Blueprint $table) {
+            
             $table->bigIncrements('id');
 
             $table->unsignedBigInteger('song_id');
 
             $table->unsignedBigInteger('singer_id');
 
-            $table->foreign('song_id')->references('id')->on('songs');
+            $table->foreign('song_id')->references('id')->on('songs')->onDelete('cascade');;
 
-            $table->foreign('singer_id')->references('id')->on('singers');
+            $table->foreign('singer_id')->references('id')->on('singers')->onDelete('cascade');;
 
             $table->timestamps();
         });
