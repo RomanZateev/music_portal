@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateUsersTable extends Migration
+class CreateSongsOfSingersTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,15 +13,17 @@ class CreateUsersTable extends Migration
      */
     public function up()
     {
-        Schema::create('users', function (Blueprint $table) {
+        Schema::create('songs_of_singers', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('name');
-            $table->string('email')->unique();
-            $table->string('password');
-            
-            $table->string('type')->default('default');
 
-            $table->rememberToken();
+            $table->unsignedBigInteger('song_id');
+
+            $table->unsignedBigInteger('singer_id');
+
+            $table->foreign('song_id')->references('id')->on('songs');
+
+            $table->foreign('singer_id')->references('id')->on('singers');
+
             $table->timestamps();
         });
     }
@@ -33,6 +35,6 @@ class CreateUsersTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('users');
+        Schema::dropIfExists('songs_of_singers');
     }
 }
