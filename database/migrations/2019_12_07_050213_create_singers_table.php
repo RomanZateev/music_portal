@@ -15,7 +15,6 @@ class CreateSingersTable extends Migration
     {
         Schema::create('singers', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->binary('image')->nulable();
             $table->string('name');
             $table->string('nameURL');
             $table->timestamps();
