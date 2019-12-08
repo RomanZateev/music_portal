@@ -37,10 +37,10 @@
                 <div class="h4 font-weight-light text-secondary">{{ $loop->iteration }}</div>
             </div>
             <div class="col-sm">
-                <a class="h4 font-weight-light text-secondary nounderline" href="{{ route('song/$song->nameURL') }}">{{ $song->name }}</a>
+                <a class="h4 font-weight-light text-secondary nounderline" href="{{ URL::route('song', $song->nameURL) }}">{{$song->name}}</a>
             </div>
             <div class="col-sm">
-                <div class="h4 font-weight-light text-secondary">{{ $song->name }}</div>
+                <div class="h4 font-weight-light text-secondary">{{$song->name}}</div>
             </div>
         </div>
     @endforeach

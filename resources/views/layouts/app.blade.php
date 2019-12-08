@@ -80,6 +80,12 @@
         <main class="py-4">
             @yield('content')
         </main>
+
+        <footer class="py-4 bg-white text-black-50">
+            <div class="container text-center">
+                <a href="https://soundcloud.com/traphustler" class="h5 nounderline text-dark"> 2019 Roman: SoundCloud.com</a>
+            </div>
+        </footer>
     </div>
 </body>
 </html>

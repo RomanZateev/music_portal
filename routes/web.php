@@ -33,14 +33,14 @@ Route::get('/admin', 'AdminController@admin')
     ->middleware('is_admin')    
     ->name('admin');
 
-Route::any('/song/{nameURL}', function($nameURL){
+Route::any('/songs/{nameURL}', function($nameURL){
     $song = Song::where('nameURL', $nameURL) -> first();
 
-    if (count($songs)>0)
-        return view('song', ['song' => $song]);
-    else
-        return view('404');
-});
+    if ($song) 
+        return view('songs', ['song' => $song]);
+    else abort(404);
+    
+})->name('song');
 
 // маршрут для поиска трека или исполнителя
 Route::any('/search',function(Request $request){
