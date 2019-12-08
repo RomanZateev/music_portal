@@ -31,8 +31,6 @@ class HomeController extends Controller
     {
         $songs = Song::all();
 
-        $singers = Singer::all();
-
-        return view('index', ['songs' => $songs, 'singers' => $singers]);
+        return view('index', ['songs' => $songs]);
     }
 }

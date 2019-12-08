@@ -1,5 +1,13 @@
 <?php
 
+use App\Song;
+
+use App\Singer;
+
+use App\SongsOfSinger;
+
+use Illuminate\Support\Facades\Input;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -24,3 +32,12 @@ Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/admin', 'AdminController@admin')    
     ->middleware('is_admin')    
     ->name('admin');
+
+// маршрут для поиска трека или исполнителя, надо поправить
+Route::any('/search',function(){
+    $q = Input::get ( 'q' );
+    $user = User::where('name','LIKE','%'.$q.'%')->orWhere('email','LIKE','%'.$q.'%')->get();
+    if(count($user) > 0)
+        return view('welcome')->withDetails($user)->withQuery ( $q );
+    else return view ('welcome')->withMessage('No Details found. Try to search again !');
+});
