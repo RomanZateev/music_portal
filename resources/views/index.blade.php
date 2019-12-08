@@ -4,17 +4,21 @@
 
 <div class="container">
     <div class="row">
-        <form action="/search" method="POST" role="search">
-            {{ csrf_field() }}
-            <div class="input-group">
-                <input type="text" class="form-control" name="q" placeholder="Введите трек или исполнителя"> 
-                <span class="input-group-btn">
-                    <button type="submit" class="btn btn-default">
-                        <span class="fa fa-search"></span>
-                    </button>
-                </span>
-            </div>
-        </form>
+        <div class="col-sm">
+            <form action="/search" method="POST" accept-charset="UTF-8">
+                {{ csrf_field() }}
+                <div class="input-group mb-3">
+                    <input type="text" class="form-control" name="q" placeholder="Введите трек или исполнителя">
+
+                    <div class="input-group-append">
+                        <button class="btn btn-outline-secondary" type="submit">
+                            <span class="fa fa-search"></span>
+                        </button>
+                    </div>
+
+                </div>
+            </form>
+        </div>
     </div> 
     <div class="row">
         <div class="col-sm">
@@ -27,22 +31,27 @@
             <div class="h2 font-weight-bold">Исполнители</div>
         </div>
     </div>
-    @forelse ($songs as $song)
+    @foreach ($songs as $song)
         <div class="row">
-            <a class="h4 font-weight-light text-secondary nounderline" href="{{ route('login') }}">
-                <div class="form-inline">
-                    <div class="col-sm">
-                        <div>{{ $song->name }}</div>
-                    </div>
-                </div>
-            </a>
-        </div>
-    @empty
-        <div class="row">
-            <div class="col">
-                <div>К сожалению, ничего не найдено</div>
+            <div class="col-sm">
+                <div class="h4 font-weight-light text-secondary">{{ $loop->iteration }}</div>
+            </div>
+            <div class="col-sm">
+                <a class="h4 font-weight-light text-secondary nounderline" href="{{ route('song/$song->nameURL') }}">{{ $song->name }}</a>
+            </div>
+            <div class="col-sm">
+                <div class="h4 font-weight-light text-secondary">{{ $song->name }}</div>
             </div>
         </div>
-    @endforelse
+    @endforeach
+    @if (!empty($message))
+        <div class="row top-buffer">
+            <div class="col">
+                <div class="h4 font-weight-light text-secondary">
+                    {{ $message }}
+                </div>
+            </div>
+        </div>
+    @endif
 </div>
 @endsection
