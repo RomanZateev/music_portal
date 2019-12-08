@@ -23,9 +23,8 @@
     
         <div class="row">
             <div class="col">
-                <img src="" alt="">
+                <img src="/storage/app/img/songs/{{$song->nameURL}}.jpg" alt="" width="300" height="300">
             </div>
-            
         </div>
 
         <div class="row">
@@ -63,6 +62,6 @@
                 <div class="h4 font-weight-light text-secondary">{{$song->text}}</div>
             </div>
         </div>
-     @endif
+    @endif
 </div>
 @endsection
