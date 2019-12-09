@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateSongsOfSingersTable extends Migration
+class CreateSongsOfArtistsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,17 +13,17 @@ class CreateSongsOfSingersTable extends Migration
      */
     public function up()
     {
-        Schema::create('songs_of_singers', function (Blueprint $table) {
+        Schema::create('songs_of_artists', function (Blueprint $table) {
             
             $table->bigIncrements('id');
 
             $table->unsignedBigInteger('song_id');
 
-            $table->unsignedBigInteger('singer_id');
+            $table->unsignedBigInteger('artist_id');
 
             $table->foreign('song_id')->references('id')->on('songs')->onDelete('cascade');;
 
-            $table->foreign('singer_id')->references('id')->on('singers')->onDelete('cascade');;
+            $table->foreign('artist_id')->references('id')->on('artists')->onDelete('cascade');;
 
             $table->timestamps();
         });
@@ -36,6 +36,6 @@ class CreateSongsOfSingersTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('songs_of_singers');
+        Schema::dropIfExists('songs_of_artists');
     }
 }

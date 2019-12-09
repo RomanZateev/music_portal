@@ -20,11 +20,6 @@ use Illuminate\Http\Request;
 */
 Route::get('/', 'HomeController@index')->name('index');
 
-/*
-Route::get('/', function () {
-    return view('index');
-});*/
-
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
@@ -39,8 +34,17 @@ Route::any('/songs/{nameURL}', function($nameURL){
     if ($song) 
         return view('songs', ['song' => $song]);
     else abort(404);
-    
+
 })->name('song');
+
+Route::any('/artists/{nameURL}', function($nameURL){
+    $artist = Singer::where('nameURL', $nameURL) -> first();
+
+    if ($artist) 
+        return view('artists', ['artist' => $artist]);
+    else abort(404);
+    
+})->name('artist');
 
 // маршрут для поиска трека или исполнителя
 Route::any('/search',function(Request $request){

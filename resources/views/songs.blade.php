@@ -46,8 +46,8 @@
                 <div class="h4 font-weight-light text-secondary">{!! nl2br(e($song->text)) !!}</div>
             </div>
         </div>
-        @if ($song->video)
-            <div class="h5 font-weight-light">{!! nl2br(e($song->notes)) !!}</div>          
+        @if ($song->notes)
+            <div class="h5 font-weight-light top-buffer">{!! nl2br(e($song->notes)) !!}</div>          
         @endif
         @if ($song->video)
             <div class="row top-buffer">
