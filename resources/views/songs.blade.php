@@ -20,8 +20,7 @@
         </div>
     </div> 
     @if ($song)
-    
-        <div class="row">
+        <div class="row bg-white">
             <div class="col-4">
                 <img src="/storage/app/img/songs/{{$song->nameURL}}.jpg" alt="" width="300" height="300">
             </div>
@@ -42,12 +41,20 @@
                 </a>
             </div>
         </div>
-
-        <div class="row">
+        <div class="row bg-white top-buffer">
             <div class="col">
-                <div class="h4 font-weight-light text-secondary">{{$song->text}}</div>
+                <div class="h4 font-weight-light text-secondary">{!! nl2br(e($song->text)) !!}</div>
             </div>
         </div>
+        @if ($song->video)
+            <div class="h5 font-weight-light">{!! nl2br(e($song->notes)) !!}</div>          
+        @endif
+        @if ($song->video)
+            <div class="row top-buffer">
+                <iframe width="560" height="315" src="https://www.youtube.com/embed/GRvRIS--JRo" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            </div>            
+        @endif
+
     @endif
 </div>
 @endsection
