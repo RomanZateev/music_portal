@@ -35,7 +35,7 @@
                 @if ($song->musicAuthor)
                     <div class="h4 font-weight-bold">Автор музыки: {{$song->musicAuthor}}</div>
                 @endif
-                <a href="" id="heart">
+                <a href="" class="heart" id="{{$song->nameURL}}">
                     <img class="image_on" src="/storage/app/img/actions/heart.png" alt="heart">
                     <img class="image_off" src="/storage/app/img/actions/heart-active.png" alt="heart-active">
                 </a>
@@ -46,15 +46,25 @@
                 <div class="h4 font-weight-light text-secondary">{!! nl2br(e($song->text)) !!}</div>
             </div>
         </div>
-        @if ($song->notes)
-            <div class="h5 font-weight-light top-buffer">{!! nl2br(e($song->notes)) !!}</div>          
-        @endif
+        <div class="row bg-white top-buffer">
+            @if ($song->notes)
+                <div class="col">
+                    <div class="h5 font-weight-light">{!! nl2br(e($song->notes)) !!}</div>
+                </div>
+            @endif
+        </div>
         @if ($song->video)
-            <div class="row top-buffer">
-                <iframe width="560" height="315" src="https://www.youtube.com/embed/GRvRIS--JRo" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            <div class="row top-buffer bg-white">
+                <div class="col">
+                    <iframe width="560" height="315" src="{{$song->video}}" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                </div>
             </div>            
         @endif
+        <div class="row top-buffer">
+            <div class="col">
 
+            </div>
+        </div>
     @endif
 </div>
 @endsection

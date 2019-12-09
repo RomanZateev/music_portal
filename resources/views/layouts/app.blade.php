@@ -12,6 +12,39 @@
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>
 
+    <!-- jQuery -->
+    <script src = "https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+    <script src="https://code.jquery.com/jquery-1.9.1.min.js"></script>
+
+    <script>
+        $(document).ready(function() {
+            console.log( "document loaded" );
+
+            $('a.heart').click(function(){
+                console.log( "SALAM" );
+
+                var song = $(this).attr("id");
+                console.log(song);
+
+                $.ajax({    
+                    type: 'POST',
+                    url: '/like',
+                    data: {
+                        nameURL: song,
+                        _token : '{{ csrf_token() }}',
+                    },
+                    success:function(response){
+                        alert(response.message);
+                    },
+                    error: function (xhr, ajaxOptions, thrownError) {
+                        alert(xhr.responseText);
+                    }
+                });
+            });
+        });
+
+    </script>
+
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">

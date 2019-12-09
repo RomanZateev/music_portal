@@ -29,7 +29,7 @@
             </div>
         </div>
         @if ($song->notes)
-            <div class="h4 font-weight-light top-buffer bg-white">{!! nl2br(e($artist->notes)) !!}</div>          
+            <div class="h4 font-weight-light top-buffer bg-white">{!!nl2br(e($artist->notes))!!}</div>          
         @endif
         <div class="row top-buffer bg-white">
             @foreach ($artist->songs as $song)

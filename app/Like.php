@@ -4,9 +4,9 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class SongsOfSinger extends Model
+class Like extends Model
 {
-    protected $table = 'songs_of_singers';
+    protected $table = 'likes';
 
     public $primaryKey = 'id';
 }

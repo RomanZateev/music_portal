@@ -1,10 +1,14 @@
 <?php
 
+use App\User;
+
 use App\Song;
 
-use App\Singer;
+use App\Like;
 
-use App\SongsOfSinger;
+use App\Artist;
+
+use App\SongOfArtist;
 
 use Illuminate\Http\Request;
 
@@ -28,6 +32,7 @@ Route::get('/admin', 'AdminController@admin')
     ->middleware('is_admin')    
     ->name('admin');
 
+// композиция
 Route::any('/songs/{nameURL}', function($nameURL){
     $song = Song::where('nameURL', $nameURL) -> first();
 
@@ -37,8 +42,9 @@ Route::any('/songs/{nameURL}', function($nameURL){
 
 })->name('song');
 
+// артист
 Route::any('/artists/{nameURL}', function($nameURL){
-    $artist = Singer::where('nameURL', $nameURL) -> first();
+    $artist = Artist::where('nameURL', $nameURL) -> first();
 
     if ($artist) 
         return view('artists', ['artist' => $artist]);
@@ -46,7 +52,7 @@ Route::any('/artists/{nameURL}', function($nameURL){
     
 })->name('artist');
 
-// маршрут для поиска трека или исполнителя
+// маршрут для поиска трека
 Route::any('/search',function(Request $request){
     $q = $request -> input('q');
     $songs = Song::where('name','LIKE', $q.'%')->get();
@@ -54,3 +60,36 @@ Route::any('/search',function(Request $request){
         return view('index', ['songs' => $songs]);
     else return view('index', ['songs' => $songs])->with('message', 'К сожалению, ничего не найдено. Попробуйте еще раз');
 });
+
+// лайк на композицию -- пока не сделал
+Route::post('/like', function(Request $nameURL){
+
+    $like = Like::where([
+        ['user_id', Auth::id()],
+        ['song_id,', $nameURL]
+    ])->get();
+
+    $like = new Like;
+    $song = Song::where('nameURL', $nameURL) -> first();
+
+    $like->song_id = $song->id;
+    $like->user_id = Auth::id();
+
+    $flight->save();
+
+    if (count($like) == 1) 
+        $like->delete();   
+    else{
+
+        $like = new Like;
+        $song = Song::where('nameURL', $nameURL) -> first();
+
+        $like->song_id = $song->id;
+        $like->user_id = Auth::id();
+
+        $flight->save();
+    }
+    
+    return abort(404);
+
+})->name('like');

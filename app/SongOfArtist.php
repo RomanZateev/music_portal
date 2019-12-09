@@ -4,9 +4,9 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Singer extends Model
+class SongOfArtist extends Model
 {
-    protected $table = 'singers';
+    protected $table = 'songs_of_artists';
 
     public $primaryKey = 'id';
 }

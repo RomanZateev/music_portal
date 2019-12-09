@@ -7,15 +7,15 @@
 
   .top-buffer { margin-top:50px!important; }
 
-  .image_off, #heart:hover .image_on{
+  .image_off, .heart:hover .image_on{
     display:none!important;
   }
 
-  .image_on, #heart:hover .image_off{
+  .image_on, .heart:hover .image_off{
     display:block!important;
   }
 
-  #heart img{
+  .heart img{
     width: 25px;
     height: 25px;
   }
