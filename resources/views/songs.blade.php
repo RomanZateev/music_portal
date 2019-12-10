@@ -18,14 +18,21 @@
                 </div>
             </form>
         </div>
-    </div> 
+    </div>
+    <!-- Как передавать артистов? ругается что не коллекция -->
     @if ($song)
         <div class="row bg-white">
             <div class="col-4">
-                <img src="/storage/app/img/songs/{{$song->nameURL}}.jpg" alt="" width="300" height="300">
+                <img src="/storage/app/img/songs/{{$song->nameURL}}.jpg" class="img-front" alt="{{$song->name}}">
             </div>
             <div class="col-8">
                 <div class="h2 font-weight-bold">{{$song->name}}</div>
+                <div class="h4 font-weight-bold">
+                    Исполнители:
+                    @foreach ($artists as $artist)
+                        <a class="" href="{{ URL::route('artist', $artist->artist->nameURL) }}">{{$artist->artist->name}}</a> 
+                    @endforeach
+                </div>
                 @if ($song->album)
                     <div class="h4 font-weight-bold">Альбом: {{$song->album}}</div>
                 @endif

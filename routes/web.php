@@ -33,21 +33,27 @@ Route::get('/admin', 'AdminController@admin')
     ->name('admin');
 
 // композиция
-Route::any('/songs/{nameURL}', function($nameURL){
+Route::any('/songs/{nameURL}', function($nameURL) {
+
     $song = Song::where('nameURL', $nameURL) -> first();
 
+    $artists= SongOfArtist::with(['artist']) -> where('song_id', $song->id) -> get();
+
     if ($song) 
-        return view('songs', ['song' => $song]);
+        return view('songs', ['song' => $song, 'artists' => $artists]);
     else abort(404);
 
 })->name('song');
 
 // артист
 Route::any('/artists/{nameURL}', function($nameURL){
+
     $artist = Artist::where('nameURL', $nameURL) -> first();
 
+    $songs = SongOfArtist::with(['song']) -> where('artist_id', $artist->id) -> get();
+
     if ($artist) 
-        return view('artists', ['artist' => $artist]);
+        return view('artists', ['artist' => $artist, 'songs' => $songs]);
     else abort(404);
     
 })->name('artist');
@@ -61,7 +67,7 @@ Route::any('/search',function(Request $request){
     else return view('index', ['songs' => $songs])->with('message', 'К сожалению, ничего не найдено. Попробуйте еще раз');
 });
 
-// лайк на композицию -- пока не сделал
+// лайк на композицию // надо доделать
 Route::post('/like', function(Request $nameURL){
 
     $like = Like::where([

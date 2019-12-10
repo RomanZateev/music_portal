@@ -19,4 +19,9 @@
     width: 25px;
     height: 25px;
   }
+
+  .img-front{
+    max-width: 300px;
+    max-height: 300px;
+  }
  

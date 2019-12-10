@@ -22,19 +22,26 @@
     @if ($artist)
         <div class="row bg-white">
             <div class="col-4">
-                <img src="/storage/app/img/songs/{{$artist->nameURL}}.jpg" alt="" width="300" height="300">
+                <img src="/storage/app/img/artists/{{$artist->nameURL}}.jpg" class="img-front" alt="{{$artist->name}}">
             </div>
             <div class="col-8">
                 <div class="h2 font-weight-bold">{{$artist->name}}</div>
             </div>
         </div>
-        @if ($song->notes)
-            <div class="h4 font-weight-light top-buffer bg-white">{!!nl2br(e($artist->notes))!!}</div>          
+        @if ($artist->biograpy)
+            <div class="h4 font-weight-light top-buffer bg-white">{!!nl2br(e($artist->biograpy))!!}</div>          
         @endif
-        <div class="row top-buffer bg-white">
-            @foreach ($artist->songs as $song)
-                <div class="h4 font-weight-bold">{{$song->name}}</div>
-            @endforeach
+        <div class="row top-buffer">
+            <div class="col h3 font-weight-light">
+                Композиции исполнителя
+            </div>
+        </div>
+        <div class="row bg-white">
+            <div class="col">
+                @foreach ($songs as $song)
+                    <a class="h4 font-weight-light text-secondary" href="{{ URL::route('song', $song->song->nameURL) }}">{{$song->song->name}}</a>
+                @endforeach
+            </div>
         </div>
     @endif
 </div>

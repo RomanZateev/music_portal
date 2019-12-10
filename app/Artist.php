@@ -9,4 +9,9 @@ class Artist extends Model
     protected $table = 'artists';
 
     public $primaryKey = 'id';
+
+    public function songs()
+    {
+        return $this->hasMany('App\SongOfArtist');
+    }
 }
