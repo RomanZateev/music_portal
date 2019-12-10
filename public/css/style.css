@@ -28,4 +28,8 @@
   .text-justify {
     text-align: justify!important;
   }
+
+  .song-hover:hover {
+    background-color: #F5F5F5!important;
+  }
  

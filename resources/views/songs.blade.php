@@ -20,10 +20,10 @@
     <!-- Как передавать артистов? ругается что не коллекция -->
     @if ($song)
         <div class="row bg-white">
-            <div class="col-4">
-                <img src="/storage/app/img/songs/{{$song->nameURL}}.jpg" class="img-front" width="300" height="300" alt="{{$song->name}}">
+            <div class="col-4 m-2">
+                <img src="/storage/app/img/songs/{{$song->nameURL}}.jpg" class="rounded img-front" width="300" height="300" alt="{{$song->name}}">
             </div>
-            <div class="col-8">
+            <div class="col col-auto m-2">
                 <div class="h2 font-weight-bold">{{$song->name}}</div>
                 <div class="h4 font-weight-bold">
                     Исполнители:
@@ -46,30 +46,30 @@
                 </a>
             </div>
         </div>
-        <div class="row bg-white top-buffer">
+        <div class="row bg-white mt-4 pt-2">
             <div class="col">
                 <div class="h4 font-weight-light text-secondary">{!! nl2br(e($song->text)) !!}</div>
             </div>
         </div>
-        <div class="row bg-white top-buffer">
+        <div class="row bg-white mt-4">
             @if ($song->notes)
                 <div class="col">
-                    <div class="h5 font-weight-light">{!! nl2br(e($song->notes)) !!}</div>
+                    <div class="row">
+                        <div class="col h4 font-weight-light">О треке:</div>
+                    </div>
+                    <div class="row ">
+                        <div class="col h4 font-weight-light text-justify">{!! nl2br(e($song->notes)) !!}</div>
+                    </div>
                 </div>
             @endif
         </div>
         @if ($song->video)
-            <div class="row top-buffer bg-white">
+            <div class="row bg-white mt-4">
                 <div class="col">
                     <iframe width="560" height="315" src="{{$song->video}}" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
                 </div>
             </div>            
         @endif
-        <div class="row top-buffer">
-            <div class="col">
-
-            </div>
-        </div>
     @endif
 </div>
 @endsection
