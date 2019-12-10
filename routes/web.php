@@ -53,7 +53,7 @@ Route::any('/artists/{nameURL}', function($nameURL){
     $songs = SongOfArtist::with(['song']) -> where('artist_id', $artist->id) -> get();
 
     if ($artist) 
-        return view('artists', ['artist' => $artist, 'songs' => $songs]);
+        return view('a', ['artist' => $artist, 'songs' => $songs]);
     else abort(404);
     
 })->name('artist');

@@ -7,14 +7,12 @@
             <form action="/search" method="POST" accept-charset="UTF-8">
                 {{ csrf_field() }}
                 <div class="input-group mb-3">
-                    <input type="text" class="form-control" name="q" placeholder="Введите трек или исполнителя">
-
+                    <input type="text" class="form-control" name="q" placeholder="Поиск">
                     <div class="input-group-append">
                         <button class="btn btn-outline-secondary" type="submit">
                             <span class="fa fa-search"></span>
                         </button>
                     </div>
-
                 </div>
             </form>
         </div>
@@ -23,7 +21,7 @@
     @if ($song)
         <div class="row bg-white">
             <div class="col-4">
-                <img src="/storage/app/img/songs/{{$song->nameURL}}.jpg" class="img-front" alt="{{$song->name}}">
+                <img src="/storage/app/img/songs/{{$song->nameURL}}.jpg" class="img-front" width="300" height="300" alt="{{$song->name}}">
             </div>
             <div class="col-8">
                 <div class="h2 font-weight-bold">{{$song->name}}</div>

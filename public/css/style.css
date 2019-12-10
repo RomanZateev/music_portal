@@ -20,8 +20,12 @@
     height: 25px;
   }
 
-  .img-front{
-    max-width: 300px;
-    max-height: 300px;
+  img .img-front{
+    max-width: 300px!important;
+    max-height: 300px!important;
+  }
+
+  .text-justify {
+    text-align: justify!important;
   }
  
