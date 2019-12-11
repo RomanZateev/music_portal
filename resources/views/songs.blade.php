@@ -55,9 +55,9 @@
             @if ($song->notes)
                 <div class="col">
                     <div class="row">
-                        <div class="col h4 font-weight-light">О треке:</div>
+                        <div class="col h4 font-weight-light">О треке</div>
                     </div>
-                    <div class="row ">
+                    <div class="row">
                         <div class="col h4 font-weight-light text-justify">{!! nl2br(e($song->notes)) !!}</div>
                     </div>
                 </div>
@@ -66,9 +66,14 @@
         @if ($song->video)
             <div class="row bg-white mt-4">
                 <div class="col">
-                    <iframe width="560" height="315" src="{{$song->video}}" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                    <div class="row">
+                        <div class="col h4 font-weight-light">Клип:</div>
+                    </div>
+                    <div class="row m-1">
+                        <iframe width="560" height="315" src="{{$song->video}}" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                    </div>  
                 </div>
-            </div>            
+            </div>
         @endif
     @endif
 </div>

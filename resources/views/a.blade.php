@@ -40,14 +40,18 @@
                 </div>
                 <div class="row">
                     <div class="col">
-                        @foreach ($songs as $song)
+                        @forelse ($songs as $song)
                             <a class="h4 font-weight-light text-dark" class="" href="{{ URL::route('song', $song->song->nameURL) }}">
                                 <div class="song-hover border-bottom pt-2 pb-2">
                                     <img src="/storage/app/img/songs/{{$song->song->nameURL}}.jpg" alt="{{$song->name}}" width="50" height="50">
                                     {{$song->song->name}}
                                 </div>
-                            </a>  
-                        @endforeach
+                            </a>
+                        @empty
+                            <div class="h4 font-weight-light text-dark song-hover border-bottom pt-2 pb-2">
+                                У исполнителя еще нет композиций
+                            </div>
+                        @endforelse
                     </div>
                 </div>
             </div>

@@ -6,9 +6,9 @@ use Illuminate\Http\Request;
 
 use App\Song;
 
-use App\Singer;
+use App\Artist;
 
-use App\SongsOfSinger;
+use App\SongsOfArtist;
 
 class HomeController extends Controller
 {
@@ -30,6 +30,8 @@ class HomeController extends Controller
     public function index()
     {
         $songs = Song::all();
+
+        $artists = Artist::all();
 
         return view('index', ['songs' => $songs]);
     }
