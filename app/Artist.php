@@ -6,12 +6,18 @@ use Illuminate\Database\Eloquent\Model;
 
 class Artist extends Model
 {
-    protected $table = 'artists';
+    public function getArtistName()
+    {
+        return $this->name;
+    }
 
-    public $primaryKey = 'id';
+    public function getArtistNameURL()
+    {
+        return $this->nameURL;
+    }
 
     public function songs()
     {
-        return $this->hasMany('App\SongOfArtist');
+        return $this->belongsToMany('App\Song', 'artist_song', 'artist_id', 'song_id');
     }
 }

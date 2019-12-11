@@ -64,12 +64,12 @@ class DatabaseSeeder extends Seeder
             ',
         ]);
 
-        DB::table('songs_of_artists')->insert([
+        DB::table('artist_song')->insert([
             'artist_id' => '1',
             'song_id' => '1'
         ]);
 
-        DB::table('songs_of_artists')->insert([
+        DB::table('artist_song')->insert([
             'artist_id' => '2',
             'song_id' => '1'
         ]);
@@ -101,12 +101,12 @@ class DatabaseSeeder extends Seeder
             'musicAuthor' => 'ЛСП'
         ]);
 
-        DB::table('songs_of_artists')->insert([
+        DB::table('artist_song')->insert([
             'artist_id' => '1',
             'song_id' => '2'
         ]);
 
-        DB::table('songs_of_artists')->insert([
+        DB::table('artist_song')->insert([
             'artist_id' => '2',
             'song_id' => '2'
         ]);

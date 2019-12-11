@@ -35,11 +35,10 @@ Route::any('/songs/{nameURL}', function($nameURL) {
 
     $song = Song::where('nameURL', $nameURL) -> first();
 
-    $artists= SongOfArtist::with(['artist']) -> where('song_id', $song->id) -> get();
-
     if ($song) 
-        return view('songs', ['song' => $song, 'artists' => $artists]);
-    else abort(404);
+        return view('songs', ['song' => $song]);
+    else 
+        abort(404);
 
 })->name('song');
 
@@ -48,21 +47,23 @@ Route::any('/artists/{nameURL}', function($nameURL){
 
     $artist = Artist::where('nameURL', $nameURL) -> first();
 
-    $songs = SongOfArtist::with(['song']) -> where('artist_id', $artist->id) -> get();
-
     if ($artist) 
-        return view('a', ['artist' => $artist, 'songs' => $songs]);
+        return view('artists', ['artist' => $artist]);
     else abort(404);
     
 })->name('artist');
 
 // маршрут для поиска трека
 Route::any('/search',function(Request $request){
+
     $q = $request -> input('q');
+    
     $songs = Song::where('name','LIKE', $q.'%')->get();
+
     if(count($songs) > 0)
         return view('index', ['songs' => $songs]);
-    else return view('index', ['songs' => $songs])->with('message', 'К сожалению, ничего не найдено. Попробуйте еще раз');
+    else 
+        return view('index', ['songs' => $songs])->with('message', 'Ничего не найдено');
 });
 
 // лайк на композицию // надо доделать

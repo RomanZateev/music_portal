@@ -28,11 +28,7 @@ class HomeController extends Controller
      * @return \Illuminate\Contracts\Support\Renderable
      */
     public function index()
-    {
-        $songs = Song::all();
-
-        $artists = Artist::all();
-
-        return view('index', ['songs' => $songs]);
+    {        
+        return view('index', ['songs' => Song::get()]);
     }
 }

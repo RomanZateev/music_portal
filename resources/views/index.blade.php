@@ -30,22 +30,22 @@
         </div>
     </div>
     @foreach ($songs as $song)
-        <div class="row">
-            <div class="col-2 pt-3 pb-2">
-                <div class="h4 font-weight-light text-secondary">{{ $loop->iteration }}</div>
-            </div>
-            <div class="col-5 pt-2 pb-2">
-                <a class="h4 font-weight-light text-secondary" href="{{ URL::route('song', $song->nameURL) }}">
+        <a class="h4 font-weight-light text-secondary" href="{{ URL::route('song', $song->nameURL) }}">
+            <div class="row song-hover border-bottom">
+                <div class="col-2 pt-3 pb-2">
+                    <div class="h4 font-weight-light text-secondary">{{ $loop->iteration }}</div>
+                </div>
+                <div class="col-5 pt-2 pb-2">
                     <img src="/storage/app/img/songs/{{$song->nameURL}}.jpg" alt="{{$song->name}}" width="50" height="50">
                     {{$song->name}}
-                </a>
-            </div>
-            <div class="col-5 pt-3 pb-2">
-                <div class="h4 font-weight-light text-secondary">
-                    <a href="#">{{$song->name}}</a>
+                </div>
+                <div class="col-5 pt-3 pb-2">
+                    <div class="h4 font-weight-light text-secondary">
+                        {{$song->artists()->pluck('name')->implode(', ')}}
+                    </div>
                 </div>
             </div>
-        </div>
+        </a>
     @endforeach
     @if (!empty($message))
         <div class="row top-buffer">

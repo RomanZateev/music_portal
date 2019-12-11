@@ -17,7 +17,6 @@
             </form>
         </div>
     </div>
-    <!-- Как передавать артистов? ругается что не коллекция -->
     @if ($song)
         <div class="row bg-white">
             <div class="col-4 m-2">
@@ -27,8 +26,11 @@
                 <div class="h2 font-weight-bold">{{$song->name}}</div>
                 <div class="h4 font-weight-bold">
                     Исполнители:
-                    @foreach ($artists as $artist)
-                        <a class="" href="{{ URL::route('artist', $artist->artist->nameURL) }}">{{$artist->artist->name}}</a> 
+                    @php
+                        $artists = $song->artists()->pluck('name', 'nameURL')->toArray()
+                    @endphp
+                    @foreach ($artists as $key => $value)
+                        <a class="" href="{{ URL::route('artist', $key)}}">{{$value}}</a> 
                     @endforeach
                 </div>
                 @if ($song->album)
