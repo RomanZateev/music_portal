@@ -7,12 +7,13 @@ use Faker\Generator as Faker;
 
 $factory->define(Song::class, function (Faker $faker) {
     return [
-        'name' => $faker->name,
-        'nameURL' => $faker->text(10),
-        'text' => $faker->sentence(40),
-        'textAuthor' => $faker->text(10),
-        'musicAuthor' => $faker->text(10),
-        'album' => $faker->text(10),
-        'notes' => $faker->sentence(5),
+        'name' => $faker->word,
+        'nameURL' => $faker->word,
+        'text' => $faker->paragraphs(4),
+        'textAuthor' => $faker->name,
+        'musicAuthor' => $faker->name,
+        'album' => $faker->word,
+        'image'=> $faker->imageUrl($width = 300, $height = 300),
+        'notes' => $faker->paragraph(4),
     ];
 });

@@ -17,6 +17,7 @@ class CreateArtistsTable extends Migration
             $table->bigIncrements('id');
             $table->string('name');
             $table->string('nameURL');
+            $table->text('image');
             $table->text('biograpy');
         });
     }

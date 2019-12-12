@@ -26,11 +26,8 @@
                 <div class="h2 font-weight-bold">{{$song->name}}</div>
                 <div class="h4 font-weight-bold">
                     Исполнители:
-                    @php
-                        $artists = $song->artists()->pluck('name', 'nameURL')->toArray()
-                    @endphp
-                    @foreach ($artists as $key => $value)
-                        <a class="" href="{{ URL::route('artist', $key)}}">{{$value}}</a> 
+                    @foreach ($song->artists as $artist)
+                        <a class="" href="{{ URL::route('artist', $artist->nameURL)}}">{{$artist->name}}</a> 
                     @endforeach
                 </div>
                 @if ($song->album)

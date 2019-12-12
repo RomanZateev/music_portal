@@ -7,8 +7,9 @@ use Faker\Generator as Faker;
 
 $factory->define(Artist::class, function (Faker $faker) {
     return [
-        'name' => $faker->text(10),
-        'nameURL' => $faker->text(10),
-        'biograpy' => $faker->sentence(5),
+        'name' => $faker->name,
+        'nameURL' => $faker->word,
+        'biograpy' => $faker->paragraph(4),
+        'image'=> $faker->imageUrl($width = 300, $height = 300)
     ];
 });
