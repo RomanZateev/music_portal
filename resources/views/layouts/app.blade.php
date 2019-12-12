@@ -71,11 +71,28 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <!-- Left Side Of Navbar -->
                     <ul class="navbar-nav mr-auto">
-
+                        <div class="">
+                            <form class="form-inline my-2 my-lg-0 ml-auto" action="/search" method="POST" accept-charset="UTF-8">
+                                {{ csrf_field() }}
+                                <input class="form-control" type="search" name="q" placeholder="Композиция..." aria-label="Search">
+                                <div class="input-group-append">
+                                    <button class="btn btn-outline-secondary" type="submit">
+                                        <span class="fa fa-search"></span>
+                                    </button>
+                                </div>
+                            </form>
+                        </div>
                     </ul>
 
                     <!-- Right Side Of Navbar -->
-                    <ul class="navbar-nav ml-auto">
+                    <ul class="navbar-nav">
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ route('index') }}">Композиции</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ route('artists') }}">Исполнители</a>
+                            
+                        </li>
                         <!-- Authentication Links -->
                         @guest
                             <li class="nav-item">

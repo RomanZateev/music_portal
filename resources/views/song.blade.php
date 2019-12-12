@@ -2,21 +2,6 @@
 
 @section('content')
 <div class="container">
-    <div class="row">
-        <div class="col-sm">
-            <form action="/search" method="POST" accept-charset="UTF-8">
-                {{ csrf_field() }}
-                <div class="input-group mb-3">
-                    <input type="text" class="form-control" name="q" placeholder="Поиск">
-                    <div class="input-group-append">
-                        <button class="btn btn-outline-secondary" type="submit">
-                            <span class="fa fa-search"></span>
-                        </button>
-                    </div>
-                </div>
-            </form>
-        </div>
-    </div>
     @if ($song)
         <div class="row bg-white">
             <div class="col-4 m-2">

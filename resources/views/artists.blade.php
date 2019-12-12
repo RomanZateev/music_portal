@@ -1,62 +1,62 @@
 @extends('layouts.app')
 
 @section('content')
+
 <div class="container">
     <div class="row">
-        <div class="col-sm">
-            <form action="/search" method="POST" accept-charset="UTF-8">
-                {{ csrf_field() }}
-                <div class="input-group mb-3">
-                    <input type="text" class="form-control" name="q" placeholder="Поиск">
-                    <div class="input-group-append">
-                        <button class="btn btn-outline-secondary" type="submit">
-                            <span class="fa fa-search"></span>
-                        </button>
-                    </div>
-                </div>
-            </form>
+        <div class="col-4">
+            <div class="row">
+                @if ($russian ?? '')
+                    @foreach ($russian as $letter)
+                        <div class="col">
+                            <a class="h4 font-weight-light text-secondary" href="{{ URL::route('search_artist', $letter) }}">
+                                {{$letter}}
+                            </a>
+                        </div>
+                    @endforeach
+                @endif
+            </div>
+        </div>
+        <div class="col">
+
+        </div>
+        <div class="col-4">
+            <div class="row">
+                @if ($english ?? '')
+                    @foreach ($english as $letter)
+                        <div class="col">
+                            <a class="h4 font-weight-light text-secondary" href="{{ URL::route('search_artist', $letter) }}">
+                                {{$letter}}
+                            </a>
+                        </div>   
+                    @endforeach
+                @endif
+            </div>
         </div>
     </div>
-    @if ($artist)
-        <div class="row">
-            <div class="col-md-8 bg-white mr-2">
-                <div class="row justify-content-md-center pt-2">
-                    <img src="{{$artist->image}}" class="rounded img-front" alt="{{$artist->name}}" class="img-front">
-                </div>
-                <div class="row justify-content-md-center pt-2">
-                    <div class="h2 font-weight-bold">{{$artist->name}}</div>
-                </div>
-                <div class="row">
-                    @if ($artist->biograpy)
-                        <div class="col">
-                            <div class="h4 font-weight-light bg-white text-justify pt-4">{!!nl2br(e($artist->biograpy))!!}</div>
+    <div class="row">
+        @if ($artists ?? '')
+            @forelse ($artists as $artist)
+                <div class="col-2 song-hover pt-2 pb-2 ml-20">
+                    <a class="h4 font-weight-light text-dark" class="" href="{{ URL::route('artist', $artist->nameURL) }}">
+                        <div class="row justify-content-md-center">
+                            <img src="{{$artist->image}}" alt="{{$artist->name}}" width="150" height="150" class="rounded-circle">
                         </div>
-                    @endif
+                        <div class="row justify-content-md-center">
+                            {{$artist->name}}
+                        </div>
+                    </a>
                 </div>
-            </div>
-            <div class="col bg-white">
-                <div class="row h3 font-weight-light">
-                    <div class="col">
-                        Композиции
-                    </div>
+            @empty
+                <div class="h4 font-weight-light text-dark song-hover border-bottom pt-2 pb-2">
+                    Исполнители не найдены
                 </div>
-                <div class="row">
-                    <div class="col overflow-auto">
-                        @forelse ($artist->songs as $song)
-                            <a class="h4 font-weight-light text-dark" class="" href="{{ URL::route('song', $song->nameURL) }}">
-                                <div class="song-hover border-bottom pt-2 pb-2">
-                                    <img src="{{$song->image}}" alt="{{$song->name}}" width="50" height="50">
-                                    {{$song->name}}
-                                </div>
-                            </a>
-                        @empty
-                            <div class="h4 font-weight-light text-dark song-hover border-bottom pt-2 pb-2">
-                                У исполнителя еще нет композиций
-                            </div>
-                        @endforelse
-                    </div>
-                </div>
-            </div>
+            @endforelse
+        @endif
+    </div>
+    @if ($artists ?? '')
+        <div class="row pt-2 justify-content-md-center">
+            {{ $artists->links() }}
         </div>
     @endif
 </div>
