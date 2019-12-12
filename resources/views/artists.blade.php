@@ -41,7 +41,7 @@
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col">
+                    <div class="col overflow-auto">
                         @forelse ($artist->songs as $song)
                             <a class="h4 font-weight-light text-dark" class="" href="{{ URL::route('song', $song->nameURL) }}">
                                 <div class="song-hover border-bottom pt-2 pb-2">

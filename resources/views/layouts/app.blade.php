@@ -114,16 +114,6 @@
             @yield('content')
         </main>
 
-        <div class="container py-4 bg-white">
-            <div class="row">
-                <div class="col">
-                    <div class="col h4 font-weight-light text-justify">
-                        Спасибо, что пользуетесь нашим веб-сайтом! Мы, в свою очередь, будем и дальше радовать вас текстами популярных копозиций!
-                    </div>
-                </div>
-            </div>
-        </div>
-
         <footer class="py-4 mt-4 bg-white text-black-50">
             <div class="container text-center">
                 <a href="https://soundcloud.com/traphustler" class="h5 nounderline text-dark"> 2019 Roman: SoundCloud.com</a>

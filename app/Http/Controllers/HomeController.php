@@ -29,6 +29,6 @@ class HomeController extends Controller
      */
     public function index()
     {        
-        return view('index', ['songs' => Song::get()]);
+        return view('index', ['songs' => Song::orderBy('name')->paginate(25)]);
     }
 }

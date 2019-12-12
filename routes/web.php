@@ -24,6 +24,20 @@ use Illuminate\Http\Request;
 */
 Route::get('/', 'HomeController@index')->name('index');
 
+Route::get('/home', 'HomeController@index')->name('index');
+
+Route::any('/search',function(Request $request){
+
+    $q = $request -> input('q');
+    
+    $songs = Song::where('name','LIKE', $q.'%')->orderBy('name')->paginate(25);
+
+    if(count($songs) > 0)
+        return view('index', ['songs' => $songs]);
+    else 
+        return view('index', ['songs' => $songs])->with('message', 'Ничего не найдено');
+});
+
 Auth::routes();
 
 Route::get('/admin', 'AdminController@admin')    
@@ -52,19 +66,6 @@ Route::any('/artists/{nameURL}', function($nameURL){
     else abort(404);
     
 })->name('artist');
-
-// маршрут для поиска трека
-Route::any('/search',function(Request $request){
-
-    $q = $request -> input('q');
-    
-    $songs = Song::where('name','LIKE', $q.'%')->get();
-
-    if(count($songs) > 0)
-        return view('index', ['songs' => $songs]);
-    else 
-        return view('index', ['songs' => $songs])->with('message', 'Ничего не найдено');
-});
 
 // лайк на композицию // надо доделать
 Route::post('/like', function(Request $nameURL){

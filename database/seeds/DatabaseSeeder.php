@@ -1,5 +1,8 @@
 <?php
 
+use App\Artist;
+use App\Song;
+use App\User;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -18,6 +21,8 @@ class DatabaseSeeder extends Seeder
             'type' => 'admin'
         ]);
 
+        factory(User::class, 10)->create();
+
         DB::table('artists')->insert([
             'name' => 'ЛСП',
             'nameURL' => 'lsp',
@@ -32,6 +37,36 @@ class DatabaseSeeder extends Seeder
             'image' => 'http://cdn01.ru/files/users/images/4c/4d/4c4d52406f839f0a7bc49fb9886bc449.jpg',
             'biograpy' => 
             'Oxxxymiron (Оксимиро́н; настоящее имя — Миро́н Я́нович Фёдоров; род. 31 января 1985 года, Ленинград, РСФСР, СССР) — российский хип-хоп-исполнитель и бывший исполнительный директор букинг-агентства Booking Machine. Один из основателей и бывший участник лейбла Vagabund.'
+        ]);
+
+        factory(Artist::class, 50)->create();
+
+        DB::table('songs')->insert([
+            'name' => 'Мне скучно жить',
+            'nameURL' => 'mne-skuchno-jit',
+            'image' => 'https://www.gl5.ru/photos/o/oxxxymiron/oxxxymiron-mne-skuchno-zhit.jpg',
+
+            'text' => 
+            '[Куплет 1: ЛСП]
+            Моя милая девочка Саша — сердцеедка со стажем
+            Как и я, прямо скажем, но мы ничего прямо друг другу не скажем (нет)
+            Чтобы не портить наш красивый рассказ, я буду слепой статуей
+            От меня и не надо ей глаз — не надоесть быть моей надо ей
+            Но какими бы полными не были наши сосуды
+            Рано или поздно, мы выпьем до дна друг друга
+            А в высохших лужах не видно звёзды
+            И уйти, не хлопая дверью, — всё, что ты мне готова предложить
+            А я уже думал, что с тобой мне может быть не скучно жить
+
+            [Припев: ЛСП]
+            Люди бегут туда-сюда — только пятки сверкают
+            Эти люди всегда, что делать, знают
+            А мне скучно жить, скучно жить, скучно
+            Мне нечего делать и поэтому скучно жить, скучно жить, скучно
+            Жить…',
+
+            'textAuthor' => 'ЛСП',
+            'musicAuthor' => 'ЛСП'
         ]);
 
         DB::table('songs')->insert([
@@ -67,6 +102,10 @@ class DatabaseSeeder extends Seeder
             ',
         ]);
 
+        factory(Song::class, 50)->create();
+
+        $artists = App\Artist::all();
+
         DB::table('artist_song')->insert([
             'artist_id' => '1',
             'song_id' => '1'
@@ -75,34 +114,6 @@ class DatabaseSeeder extends Seeder
         DB::table('artist_song')->insert([
             'artist_id' => '2',
             'song_id' => '1'
-        ]);
-
-        DB::table('songs')->insert([
-            'name' => 'Мне скучно жить',
-            'nameURL' => 'mne-skuchno-jit',
-            'image' => 'https://www.gl5.ru/photos/o/oxxxymiron/oxxxymiron-mne-skuchno-zhit.jpg',
-
-            'text' => 
-            '[Куплет 1: ЛСП]
-            Моя милая девочка Саша — сердцеедка со стажем
-            Как и я, прямо скажем, но мы ничего прямо друг другу не скажем (нет)
-            Чтобы не портить наш красивый рассказ, я буду слепой статуей
-            От меня и не надо ей глаз — не надоесть быть моей надо ей
-            Но какими бы полными не были наши сосуды
-            Рано или поздно, мы выпьем до дна друг друга
-            А в высохших лужах не видно звёзды
-            И уйти, не хлопая дверью, — всё, что ты мне готова предложить
-            А я уже думал, что с тобой мне может быть не скучно жить
-
-            [Припев: ЛСП]
-            Люди бегут туда-сюда — только пятки сверкают
-            Эти люди всегда, что делать, знают
-            А мне скучно жить, скучно жить, скучно
-            Мне нечего делать и поэтому скучно жить, скучно жить, скучно
-            Жить…',
-
-            'textAuthor' => 'ЛСП',
-            'musicAuthor' => 'ЛСП'
         ]);
 
         DB::table('artist_song')->insert([
@@ -114,5 +125,11 @@ class DatabaseSeeder extends Seeder
             'artist_id' => '2',
             'song_id' => '2'
         ]);
+
+        Song::all()->each(function ($song) use ($artists) { 
+            $song->artists()->attach(
+                $artists->random(rand(1, 3))->pluck('id')->toArray()
+            ); 
+        });
     }
 }

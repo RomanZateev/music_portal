@@ -6,7 +6,5 @@ use Illuminate\Database\Eloquent\Model;
 
 class Like extends Model
 {
-    protected $table = 'likes';
-
-    public $primaryKey = 'id';
+    public $timestamps = false;
 }

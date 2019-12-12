@@ -20,13 +20,13 @@
     @if ($song)
         <div class="row bg-white">
             <div class="col-4 m-2">
-                <img src="/storage/app/img/songs/{{$song->nameURL}}.jpg" class="rounded img-front" width="300" height="300" alt="{{$song->name}}">
+                <img src="{{$song->image}}" class="rounded img-front" width="300" height="300" alt="{{$song->name}}">
             </div>
             <div class="col col-auto m-2">
                 <div class="h2 font-weight-bold">{{$song->name}}</div>
                 <div class="h4 font-weight-bold">
                     Исполнители:
-                    @foreach ($song->artists as $artist)
+                    @foreach ($song->artists as $artist){{ $loop->first ? '' : ', ' }}
                         <a class="" href="{{ URL::route('artist', $artist->nameURL)}}">{{$artist->name}}</a> 
                     @endforeach
                 </div>

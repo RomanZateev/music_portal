@@ -33,10 +33,12 @@
         <a class="h4 font-weight-light text-secondary" href="{{ URL::route('song', $song->nameURL) }}">
             <div class="row song-hover border-bottom">
                 <div class="col-2 pt-3 pb-2">
-                    <div class="h4 font-weight-light text-secondary">{{ $loop->iteration }}</div>
+                    <div class="h4 font-weight-light text-secondary">
+                        {{ ($songs ->currentpage()-1) * $songs ->perpage() + $loop->index + 1 }}
+                    </div>
                 </div>
                 <div class="col-5 pt-2 pb-2">
-                    <img src="/storage/app/img/songs/{{$song->nameURL}}.jpg" alt="{{$song->name}}" width="50" height="50">
+                    <img src="{{$song->image}}" alt="{{$song->name}}" width="50" height="50">
                     {{$song->name}}
                 </div>
                 <div class="col-5 pt-3 pb-2">
@@ -47,6 +49,11 @@
             </div>
         </a>
     @endforeach
+
+    <div class="row pt-2 justify-content-md-center">
+        {{ $songs->links() }}
+    </div>
+
     @if (!empty($message))
         <div class="row top-buffer">
             <div class="col">

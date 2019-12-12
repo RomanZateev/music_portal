@@ -10,6 +10,8 @@ class User extends Authenticatable
 {
     use Notifiable;
 
+    public $timestamps = false;
+
     const ADMIN_TYPE = 'admin';
     const DEFAULT_TYPE = 'default';
 
@@ -33,14 +35,5 @@ class User extends Authenticatable
      */
     protected $hidden = [
         'password', 'remember_token',
-    ];
-
-    /**
-     * The attributes that should be cast to native types.
-     *
-     * @var array
-     */
-    protected $casts = [
-        'email_verified_at' => 'datetime',
     ];
 }
