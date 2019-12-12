@@ -8,7 +8,7 @@ use Faker\Generator as Faker;
 $factory->define(Song::class, function (Faker $faker) {
     return [
         'name' => $faker->word,
-        'nameURL' => $faker->word,
+        'nameURL' => $faker->unique(true)->word,
         'text' => $faker->paragraph(20),
         'textAuthor' => $faker->lastName,
         'musicAuthor' => $faker->lastName,

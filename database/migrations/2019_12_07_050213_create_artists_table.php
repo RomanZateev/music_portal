@@ -16,7 +16,7 @@ class CreateArtistsTable extends Migration
         Schema::create('artists', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('name');
-            $table->string('nameURL');
+            $table->string('nameURL')->unique();
             $table->text('image');
             $table->text('biograpy');
         });
