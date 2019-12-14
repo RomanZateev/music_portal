@@ -4,6 +4,30 @@
 <div class="container">
     @if ($artist)
         <div class="row">
+            @if (auth()->check())
+    
+                @if (auth()->user()->isAdmin())
+                    <div class="col">
+                        <a class="btn btn-success text-white" href="{{URL::route('artist_create')}}">Добавить пользователя</a>
+                    </div>
+                    <div class="col">
+                        <form class="form-horizontal" action="{{ route('artist_delete',['artist_id'=>$artist->id]) }}" method="post">
+                            {{method_field('DELETE')}}
+                            {{ csrf_field() }}
+                            <button class="btn btn-danger" type="submit">Удалить</button>
+                        </form>
+                    </div>
+                    <div class="col">
+                        <form class="form-horizontal" action="{{ route('artist_edit',['artist_id'=>$artist->id]) }}" method="get">
+                            {{ csrf_field() }}
+                            <button class="btn btn-warning" type="submit">Редактировать</button>
+                        </form>
+                    </div>
+                @endif
+    
+            @endif
+        </div>
+        <div class="row">
             <div class="col-md-8 bg-white mr-2">
                 <div class="row justify-content-md-center pt-2">
                     <img src="{{$artist->image}}" class="rounded img-front" alt="{{$artist->name}}" class="img-front">

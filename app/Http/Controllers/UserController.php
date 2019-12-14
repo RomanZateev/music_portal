@@ -14,7 +14,7 @@ class UserController extends Controller
      */
     public function index()
     {
-        return (view('user\index'));
+        return view('user/index');
     }
 
     /**
@@ -24,9 +24,9 @@ class UserController extends Controller
      */
     public function create()
     {
-        return view('user/add');
+        return view('user/create');
     }
-
+    
     /**
      * Store a newly created resource in storage.
      *
@@ -43,7 +43,6 @@ class UserController extends Controller
         ]);
         
         $request['password'] = bcrypt($request['password']);
-        
         User::create($request->all());
 
         return redirect()->route('users');
@@ -55,9 +54,12 @@ class UserController extends Controller
      * @param  \App\User  $user
      * @return \Illuminate\Http\Response
      */
-    public function show(User $user)
+    public function show($id)
     {
-        //
+        $user = User::where('id', $id) -> first();
+
+        if ($user) return view('user', ['user' => $user]);
+        else abort(404);
     }
 
     /**
@@ -87,11 +89,8 @@ class UserController extends Controller
         ]);
 
         $data = $request->all();
-
         $user = User::find($data['id']);
-        
-        $user->fill($data);
-        
+        $user->fill($data);     
         $user->save();
 
         return redirect()->route('users');
@@ -103,8 +102,14 @@ class UserController extends Controller
      * @param  \App\User  $user
      * @return \Illuminate\Http\Response
      */
-    public function destroy(User $user)
+    public function destroy($id)
     {
-        //
+        User::find($id)->delete();
+        return back();
+    }
+
+    public function all()
+    {
+        return view('users', ['users' => User::orderBy('type')->paginate(25)]);
     }
 }

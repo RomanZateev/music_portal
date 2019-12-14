@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Song;
 use Illuminate\Http\Request;
 
 class SongsController extends Controller
@@ -43,9 +44,14 @@ class SongsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($nameURL)
     {
-        //
+        $song = Song::where('nameURL', $nameURL) -> first();
+
+        if ($song) 
+            return view('song/index', ['song' => $song]);
+        else 
+            abort(404);
     }
 
     /**

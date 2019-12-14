@@ -5,7 +5,7 @@
 
 <div class="container">
     <div class="row">
-        <form method="POST" action="{{route('user_update')}}" class="width">
+        <form method="POST" action="{{route('user_update')}}">
             <div class="form-group">
                 <label for="" class="about-form">Имя</label>
                 <input autocomplete="off" type="text" name="name" class='form-control width' value="{!! $user->name !!}">
