@@ -4,13 +4,13 @@
 
 <div class="container">
     <div class="row">
-        <a class="btn btn-success btn-lg mb-4 text-white" href="{{URL::route('user_add')}}">Добавить пользователя</a>
+        <a class="btn btn-success btn-lg mb-4 text-white" href="{{URL::route('user_create')}}">Добавить пользователя</a>
     </div>
     <div class="row">
         <div class="col-1">
             <div class="h2 font-weight-bold">№</div>
         </div>
-        <div class="col-4">
+        <div class="col-3">
             <div class="h2 font-weight-bold">Имя пользователя</div>
         </div>
         <div class="col-1">
@@ -28,7 +28,7 @@
                             {{ ($users->currentpage()-1) * $users ->perpage() + $loop->index + 1 }}
                         </div>
                     </div>
-                    <div class="col-4 pt-2 pb-2">
+                    <div class="col-3 pt-2 pb-2">
                         {{$user->name}}
                     </div>
                     <div class="col-1 pt-2 pb-2">
@@ -38,10 +38,17 @@
                         {{$user->email}}
                     </div>
                     <div class="col">
-                        <span class="fa fa-pencil"></span>
+                        <form class="form-horizontal" action="{{ route('user_delete',['user_id'=>$user->id]) }}" method="post">
+                            {{method_field('DELETE')}}
+                            {{ csrf_field() }}
+                            <button class="btn btn-danger" type="submit">Удалить</button>
+                        </form>
                     </div>
                     <div class="col">
-                        <span class="fa fa-times"></span>
+                        <form class="form-horizontal" action="{{ route('user_edit',['user_id'=>$user->id]) }}" method="get">
+                            {{ csrf_field() }}
+                            <button class="btn btn-warning" type="submit">Редактировать</button>
+                        </form>
                     </div>
                 </div>
         @endforeach

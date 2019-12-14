@@ -49,8 +49,24 @@ Route::any('/user/{id}', function($id) {
 
 })->name('user');
 
-//добавление пользователя
-Route::get('/user/add', 'UserController@index')->name('user_add');
+//удаление
+Route::delete('users/delete/{user_id}', function(\App\User $user_id) {
+
+    $user_id->delete();
+    return back();
+
+})->name('user_delete');
+
+//обновление
+Route::get('users/edit/{user_id}','UserController@edit')->name('user_edit');
+
+Route::post('users/update', 'UserController@update')->name('user_update');
+
+//добавление
+Route::get('users/create','UserController@create')->name('user_create');
+
+Route::post('users/store','UserController@store')->name('user_store');
+
 
 //артисты
 Route::get('/artists', function(Request $request){
@@ -159,3 +175,10 @@ Route::post('/like', function(Request $nameURL){
     return abort(404);
 
 })->name('like');
+
+
+//фильтр
+Route::filter('auth', function()
+{
+  if (Auth::guest()) return Redirect::guest('login');
+});

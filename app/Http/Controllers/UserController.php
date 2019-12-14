@@ -24,7 +24,7 @@ class UserController extends Controller
      */
     public function create()
     {
-        //
+        return view('user/add');
     }
 
     /**
@@ -35,7 +35,18 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this->validate($request, [
+            'name' => 'required|max:255',
+            'email' => 'required|max:255',
+            'type' => 'required|max:255',
+            'password' => 'required'
+        ]);
+        
+        $request['password'] = bcrypt($request['password']);
+        
+        User::create($request->all());
+
+        return redirect()->route('users');
     }
 
     /**
@@ -55,9 +66,9 @@ class UserController extends Controller
      * @param  \App\User  $user
      * @return \Illuminate\Http\Response
      */
-    public function edit(User $user)
-    {
-        //
+    public function edit($id)
+    {        
+        return view('user/edit', ['user' => User::where('id', $id)->first()]);
     }
 
     /**
@@ -67,9 +78,23 @@ class UserController extends Controller
      * @param  \App\User  $user
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, User $user)
+    public function update(Request $request)
     {
-        //
+        $this->validate($request, [
+            'name' => 'required|max:255',
+            'email' => 'required|max:255',
+            'type' => 'required|max:255'
+        ]);
+
+        $data = $request->all();
+
+        $user = User::find($data['id']);
+        
+        $user->fill($data);
+        
+        $user->save();
+
+        return redirect()->route('users');
     }
 
     /**
