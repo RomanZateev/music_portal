@@ -3,7 +3,7 @@
 @section('content')
 
 <div class="container">
-    <div class="row">
+    <div class="row bg-white">
         <div class="col-4">
             <div class="row">
                 @if ($russian ?? '')
@@ -57,6 +57,16 @@
     @if ($artists ?? '')
         <div class="row pt-2 justify-content-md-center">
             {{ $artists->links() }}
+        </div>
+    @endif
+
+    @if (!empty($message))
+        <div class="row top-buffer">
+            <div class="col">
+                <div class="h4 font-weight-light text-secondary">
+                    {{ $message }}
+                </div>
+            </div>
         </div>
     @endif
 </div>

@@ -32,4 +32,11 @@
   .song-hover:hover {
     background-color: #F5F5F5!important;
   }
+
+  footer {
+    position: fixed;
+    height: 100px;
+    bottom: 0;
+    width: 100%;
+}
  

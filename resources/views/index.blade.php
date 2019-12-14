@@ -1,54 +1,16 @@
 @extends('layouts.app')
 
 @section('content')
-
-<div class="container">
-    <div class="row">
-        <div class="col-2">
-            <div class="h2 font-weight-bold">№</div>
-        </div>
-        <div class="col-5">
-            <div class="h2 font-weight-bold">Треки</div>
-        </div>
-        <div class="col-5">
-            <div class="h2 font-weight-bold">Исполнители</div>
-        </div>
-    </div>
-    @if ($songs ?? '')
-        @foreach ($songs as $song)
-            <a class="h4 font-weight-light text-secondary" href="{{ URL::route('song', $song->nameURL) }}">
-                <div class="row song-hover border-bottom">
-                    <div class="col-2 pt-3 pb-2">
-                        <div class="h4 font-weight-light text-secondary">
-                            {{ ($songs ->currentpage()-1) * $songs ->perpage() + $loop->index + 1 }}
-                        </div>
-                    </div>
-                    <div class="col-5 pt-2 pb-2">
-                        <img src="{{$song->image}}" alt="{{$song->name}}" width="50" height="50">
-                        {{$song->name}}
-                    </div>
-                    <div class="col-5 pt-3 pb-2">
-                        <div class="h4 font-weight-light text-secondary">
-                            {{$song->artists()->pluck('name')->implode(', ')}}
-                        </div>
-                    </div>
-                </div>
-            </a>
-        @endforeach
-
-        <div class="row pt-2 justify-content-md-center">
-            {{ $songs->links() }}
-        </div>
-    @endif
-
-    @if (!empty($message))
-        <div class="row top-buffer">
-            <div class="col">
-                <div class="h4 font-weight-light text-secondary">
-                    {{ $message }}
-                </div>
+<div class="container bg-white">
+    <div class="row mt-4 pt-2">
+        <div class="col">
+            <div class="row h2 font-weight-bold">
+                Дорогие Друзья, посетители нашего сайта!
+            </div>
+            <div class="row h4 font-weight-light text-secondary">
+                Мы рады Вас приветствовать на страницах нашего сайта, посвященного русским, украинским и зарубежным текстам песен. Сразу сообщим, что наш ресурс достаточно молодой, но мы амбициозны в наших начинаниях и поэтому будем стараться публиковать как можно больше правильных и популярных текстов песен. Мы преследуем цель постоянно следить за рейтингом наиболее популярных отчественных и зарубежных песен и соответственно размещать на эти песни тексты.
             </div>
         </div>
-    @endif
+    </div>
 </div>
 @endsection

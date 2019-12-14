@@ -23,29 +23,36 @@ use Illuminate\Http\Request;
 |
 */
 
+//index
 Route::get('/', 'HomeController@index')->name('index');
 
+//index
 Route::get('/home', 'HomeController@index')->name('index');
 
 
-// отобразить пользователя
+//пользователи
+Route::get('/users', function(Request $request){
+
+    return view('users', ['users' => User::orderBy('type')->paginate(25)]);
+
+})->name('users');
+
+// пользователь
+Route::any('/user/{id}', function($id) {
+
+    $user = User::where('id', $id) -> first();
+
+    if ($user) 
+        return view('user', ['user' => $user]);
+    else 
+        abort(404);
+
+})->name('user');
+
+//добавление пользователя
 Route::get('/user/add', 'UserController@index')->name('user_add');
 
-// отобразить исполнителя
-Route::get('/artist/add', 'ArtistsController@index')->name('artist_add');
-
-// отобразить композицию
-Route::get('/song/add', 'SongsController@index')->name('song_add');
-
-// добавить пользователя
-Route::post('/user/add', 'UserController@create')->name('user_add_post');
-
-// добавить исполнителя
-Route::post('/artist/add', 'ArtistsController@create')->name('artist_add_post');
-
-// добавить композицию
-Route::post('/song/add', 'SongsController@create')->name('song_add_post');
-
+//артисты
 Route::get('/artists', function(Request $request){
 
     $russian = ['A', 'Б', 'В', 'Г', 'Д', 'Е', 'Ж', 'З', 'И', 'К', 'Л', 'М', 'Н', 'О', 'П', 'Р', 'С', 'Т', 'У', 'Ф', 'Х', 'Ц', 'Ч', 'Ш', 'Щ', 'Э', 'Ю', 'Я'];
@@ -56,7 +63,18 @@ Route::get('/artists', function(Request $request){
 
 })->name('artists');
 
-//поиск артиста по букве
+//артист
+Route::any('/artist/{nameURL}', function($nameURL){
+
+    $artist = Artist::where('nameURL', $nameURL) -> first();
+
+    if ($artist) 
+        return view('artist', ['artist' => $artist]);
+    else abort(404);
+    
+})->name('artist');
+
+//поиск артиста
 Route::any('/artists/{letter}', function($letter){
 
     $artists = Artist::where('name','LIKE', $letter.'%')->orderBy('name')->paginate(25);
@@ -68,9 +86,16 @@ Route::any('/artists/{letter}', function($letter){
     if(count($artists) > 0)
         return view('artists', ['artists' => $artists, 'russian' => $russian, 'english' => $english]);
     else 
-        return view('artists', ['message' => 'Ничего не найдено']);
+        return view('artists', ['message' => 'Ничего не найдено', 'russian' => $russian, 'english' => $english]);
 })->name('search_artist');
 
+
+//композиции
+Route::get('/songs', function(Request $request){
+
+    return view('songs', ['songs' => Song::orderBy('name')->paginate(25)]);
+
+})->name('songs');
 // композиция
 Route::any('/song/{nameURL}', function($nameURL) {
 
@@ -83,16 +108,17 @@ Route::any('/song/{nameURL}', function($nameURL) {
 
 })->name('song');
 
-//поиск композиции по подстроке
+//поиск композиции
 Route::any('/search',function(Request $request){
     
     $songs = Song::where('name','LIKE', $request -> input('q').'%')->orderBy('name')->paginate(25);
 
     if(count($songs) > 0)
-        return view('index', ['songs' => $songs]);
+        return view('songs', ['songs' => $songs]);
     else 
-        return view('index', ['message' => 'Ничего не найдено']);
+        return view('songs', ['message' => 'Ничего не найдено']);
 });
+
 
 Auth::routes();
 
@@ -100,18 +126,8 @@ Route::get('/admin', 'AdminController@admin')
     ->middleware('is_admin')    
     ->name('admin');
 
-// артист
-Route::any('/artist/{nameURL}', function($nameURL){
 
-    $artist = Artist::where('nameURL', $nameURL) -> first();
-
-    if ($artist) 
-        return view('artist', ['artist' => $artist]);
-    else abort(404);
-    
-})->name('artist');
-
-// лайк на композицию // надо доделать
+// лайк на композицию
 Route::post('/like', function(Request $nameURL){
 
     $like = Like::where([

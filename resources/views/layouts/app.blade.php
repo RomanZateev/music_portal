@@ -86,8 +86,17 @@
 
                     <!-- Right Side Of Navbar -->
                     <ul class="navbar-nav">
+                        @if (auth()->check())
+
+                            @if (auth()->user()->isAdmin())
+                                <li class="nav-item">
+                                    <a class="nav-link" href="{{ route('users') }}">Пользователи</a>
+                                </li>
+                            @endif
+
+                        @endif
                         <li class="nav-item">
-                            <a class="nav-link" href="{{ route('index') }}">Композиции</a>
+                            <a class="nav-link" href="{{ route('songs') }}">Композиции</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="{{ route('artists') }}">Исполнители</a>
