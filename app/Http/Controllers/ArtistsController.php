@@ -43,11 +43,8 @@ class ArtistsController extends Controller
      */
     public function store(Request $request)
     {
-        return $request;
-
         $this->validate($request, [
             'name' => 'required|max:255',
-            'nameURL' => 'required|max:255',
             'biograpy' => 'required'
         ]);
         
@@ -55,7 +52,7 @@ class ArtistsController extends Controller
 
         if ($request->hasFile('imageServer')) {
             $image      = $request->file('imageServer');
-            $fileName   = $request->input('nameURL') . '.' . $image->getClientOriginalExtension();
+            $fileName   = $request->input('id') . '.' . $image->getClientOriginalExtension();
 
             $img = Image::make($image->getRealPath());
             $img->resize(300, 300, function ($constraint) {
@@ -77,9 +74,9 @@ class ArtistsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($nameURL)
+    public function show($id)
     {
-        $artist = Artist::where('nameURL', $nameURL) -> first();
+        $artist = Artist::where('id', $id) -> first();
 
         if ($artist) 
             return view('artist/index', ['artist' => $artist, 'songs' => Song::all()]);
@@ -108,7 +105,6 @@ class ArtistsController extends Controller
     {
         $this->validate($request, [
             'name' => 'required|max:255',
-            'nameURL' => 'required|max:255',
             'image' => 'required|max:255',
             'biograpy' => 'required'
         ]);
@@ -118,21 +114,8 @@ class ArtistsController extends Controller
         $user->fill($data);
         $user->save();
 
-        if ($request->hasFile('photo')) {
-            $image      = $request->file('photo');
-            $fileName   = time() . '.' . $image->getClientOriginalExtension();
-
-            $img = Image::make($image->getRealPath());
-            $img->resize(120, 120, function ($constraint) {
-                $constraint->aspectRatio();                 
-            });
-
-            $img->stream(); // <-- Key point
-
-            //dd();
-            Storage::disk('local')->put('images/1/smalls'.'/'.$fileName, $img, 'public');
-        }
-
+        //картинка
+        
         return redirect()->route('artists');
     }
 

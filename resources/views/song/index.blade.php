@@ -12,7 +12,7 @@
                 <div class="h4 font-weight-bold">
                     Исполнители:
                     @foreach ($song->artists as $artist){{ $loop->first ? '' : ', ' }}
-                        <a class="" href="{{ URL::route('artist', $artist->nameURL)}}">{{$artist->name}}</a> 
+                        <a class="" href="{{ URL::route('artist', $artist->id)}}">{{$artist->name}}</a> 
                     @endforeach
                 </div>
                 @if ($song->album)
@@ -24,7 +24,7 @@
                 @if ($song->musicAuthor)
                     <div class="h4 font-weight-bold">Автор музыки: {{$song->musicAuthor}}</div>
                 @endif
-                <a href="" class="heart" id="{{$song->nameURL}}">
+                <a href="" class="heart" id="{{$song->id}}">
                     <img class="image_on" src="/storage/app/img/actions/heart.png" alt="heart">
                     <img class="image_off" src="/storage/app/img/actions/heart-active.png" alt="heart-active">
                 </a>

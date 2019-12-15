@@ -47,7 +47,7 @@
         @if ($artists ?? '')
             @forelse ($artists as $artist)
                 <div class="col-2 song-hover pt-2 pb-2 ml-20">
-                    <a class="h4 font-weight-light text-dark" class="" href="{{ URL::route('artist', $artist->nameURL) }}">
+                    <a class="h4 font-weight-light text-dark" class="" href="{{ URL::route('artist', $artist->id) }}">
                         <div class="row justify-content-md-center">
                             <img src="{{$artist->image}}" alt="{{$artist->name}}" width="150" height="150" class="rounded-circle">
                         </div>

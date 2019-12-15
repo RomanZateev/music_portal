@@ -30,7 +30,7 @@
                     type: 'POST',
                     url: '/like',
                     data: {
-                        nameURL: song,
+                        id: song,
                         _token : '{{ csrf_token() }}',
                     },
                     success:function(response){

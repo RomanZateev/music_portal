@@ -51,7 +51,7 @@
                 <div class="row">
                     <div class="col overflow-auto">
                         @forelse ($artist->songs as $song)
-                            <a class="h4 font-weight-light text-dark" class="" href="{{ URL::route('song', $song->nameURL) }}">
+                            <a class="h4 font-weight-light text-dark" class="" href="{{ URL::route('song', $song->id) }}">
                                 <div class="song-hover border-bottom pt-2 pb-2">
                                     <img src="{{$song->image}}" alt="{{$song->name}}" width="50" height="50">
                                     {{$song->name}}

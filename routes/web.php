@@ -55,7 +55,7 @@ Route::post('users/store','UserController@store')->name('user_store');
 //артисты
 Route::get('/artists', 'ArtistsController@all')->name('artists');
 //отображение
-Route::any('/artist/{nameURL}', 'ArtistsController@show')->name('artist');
+Route::any('/artist/{artist_id}', 'ArtistsController@show')->name('artist');
 //удаление
 Route::delete('artist/delete/{artist_id}', 'ArtistsController@destroy')->name('artist_delete');
 //изменение
@@ -82,7 +82,7 @@ Route::get('/songs', function(Request $request){
 
 })->name('songs');
 // отображение
-Route::get('/song/{nameURL}', 'SongsController@show')->name('song');
+Route::get('/song/{id}', 'SongsController@show')->name('song');
 
 //поиск композиции
 Route::any('/search',function(Request $request){
@@ -96,15 +96,15 @@ Route::any('/search',function(Request $request){
 });
 
 // лайк на композицию ...
-Route::post('/like', function(Request $nameURL){
+Route::post('/like', function(Request $request){
 
     $like = Like::where([
         ['user_id', Auth::id()],
-        ['song_id,', $nameURL]
+        ['song_id,', $id]
     ])->get();
 
     $like = new Like;
-    $song = Song::where('nameURL', $nameURL) -> first();
+    $song = Song::where('id', $id) -> first();
 
     $like->song_id = $song->id;
     $like->user_id = Auth::id();
@@ -116,7 +116,7 @@ Route::post('/like', function(Request $nameURL){
     else{
 
         $like = new Like;
-        $song = Song::where('nameURL', $nameURL) -> first();
+        $song = Song::where('id', $id) -> first();
 
         $like->song_id = $song->id;
         $like->user_id = Auth::id();

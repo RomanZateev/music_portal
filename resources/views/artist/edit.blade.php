@@ -10,20 +10,21 @@
                 <label for="" class="about-form">Псевдоним</label>
                 <input autocomplete="off" type="text" name="name" class='form-control' placeholder="Псевдоним" value="{!! $artist->name !!}">
 
-                <label for="" class="about-form">Псевдоним URL</label>
-                <input autocomplete="off" type="text" name="nameURL" class='form-control' placeholder="Псевдоним URL" value="{!! $artist->nameURL !!}">
-
                 <label for="" class="about-form">Биография</label>
                 <textarea autocomplete="off" class='form-control' cols="30" rows="10" name="biograpy">
                     {!! $artist->biograpy!!}
                 </textarea>
 
                 <label for="" class="about-form">Изображение ссылка</label>
-                <img src="{{$artist->image}}" alt="" width="300" height="300">
+                @if ($artist->image)
+                    <img src="{{$artist->image}}" alt="" width="300" height="300">
+                @endif
                 <input autocomplete="off" type="url" name="image" class='form-control' placeholder="Ссылка" value="{!! $artist->image !!}">
 
                 <label for="" class="about-form">Изображение</label>
-                <img src="{{$artist->imageServer}}" alt="" width="300" height="300">
+                @if ($artist->image)
+                    <img src="{{$artist->imageServer}}" alt="" width="300" height="300">
+                @endif
                 <input type="file" name="imageServer" class='form-control-file'>
 
                 <input type="hidden" name="id" value="{!! $artist->id !!}">

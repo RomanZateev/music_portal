@@ -25,7 +25,6 @@ class DatabaseSeeder extends Seeder
 
         DB::table('artists')->insert([
             'name' => 'ЛСП',
-            'nameURL' => 'lsp',
             'image' => 'https://e-cdns-images.dzcdn.net/images/artist/08129500acb34961a00362f774262c24/500x500.jpg', 
             'biograpy' => 
             'Оле́г Вади́мович Са́вченко (белор. Але́г Вадзі́мавіч Са́ўчанка; род. 10 июля 1989, Витебск), более известный под сценическим псевдонимом ЛСП (сокращение от англ. Lil’ Stupid Pig) — белорусский певец, рэпер и автор песен из Минска. Сольную карьеру начал в 2007 году, с тех пор выпустив три мини-альбома и четыре студийных альбома. Тесно сотрудничал с могилёвским продюсером Романом Сащеко (он же Рома Англичанин; 27 апреля 1988 — 30 июля 2017) как одноимённый дуэт «ЛСП».'
@@ -33,7 +32,6 @@ class DatabaseSeeder extends Seeder
 
         DB::table('artists')->insert([
             'name' => 'Oxxxymiron',
-            'nameURL' => 'oxxxymiron',
             'image' => 'http://cdn01.ru/files/users/images/4c/4d/4c4d52406f839f0a7bc49fb9886bc449.jpg',
             'biograpy' => 
             'Oxxxymiron (Оксимиро́н; настоящее имя — Миро́н Я́нович Фёдоров; род. 31 января 1985 года, Ленинград, РСФСР, СССР) — российский хип-хоп-исполнитель и бывший исполнительный директор букинг-агентства Booking Machine. Один из основателей и бывший участник лейбла Vagabund.'
@@ -43,7 +41,6 @@ class DatabaseSeeder extends Seeder
 
         DB::table('songs')->insert([
             'name' => 'Мне скучно жить',
-            'nameURL' => 'mne-skuchno-jit',
             'image' => 'https://www.gl5.ru/photos/o/oxxxymiron/oxxxymiron-mne-skuchno-zhit.jpg',
 
             'text' => 
@@ -71,7 +68,6 @@ class DatabaseSeeder extends Seeder
 
         DB::table('songs')->insert([
             'name' => 'Безумие',
-            'nameURL' => 'bezumie',
             'image' => 'https://muzoff.net/uploads/posts/2018-07/1533030092_bezumie.png',
 
             'text' => 
@@ -102,7 +98,7 @@ class DatabaseSeeder extends Seeder
             ',
         ]);
 
-        factory(Song::class, 50)->create();
+        factory(Song::class, 150)->create();
 
         $artists = App\Artist::all();
 
@@ -128,7 +124,7 @@ class DatabaseSeeder extends Seeder
 
         Song::all()->each(function ($song) use ($artists) { 
             $song->artists()->attach(
-                $artists->random(rand(1, 3))->pluck('id')->toArray()
+                $artists->random(rand(1, 2))->pluck('id')->toArray()
             ); 
         });
     }

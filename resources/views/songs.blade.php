@@ -16,7 +16,7 @@
     </div>
     @if ($songs ?? '')
         @foreach ($songs as $song)
-            <a class="h4 font-weight-light text-secondary" href="{{ URL::route('song', $song->nameURL) }}">
+            <a class="h4 font-weight-light text-secondary" href="{{ URL::route('song', $song->id) }}">
                 <div class="row song-hover border-bottom">
                     <div class="col-2 pt-3 pb-2">
                         <div class="h4 font-weight-light text-secondary">

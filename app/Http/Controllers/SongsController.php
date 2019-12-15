@@ -44,9 +44,9 @@ class SongsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($nameURL)
+    public function show($id)
     {
-        $song = Song::where('nameURL', $nameURL) -> first();
+        $song = Song::where('id', $id) -> first();
 
         if ($song) 
             return view('song/index', ['song' => $song]);

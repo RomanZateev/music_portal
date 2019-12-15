@@ -16,7 +16,6 @@ class CreateSongsTable extends Migration
         Schema::create('songs', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('name');
-            $table->string('nameURL')->unique();
             $table->text('text');
             $table->text('image')->nullable();
             $table->text('imageServer')->nullable();
