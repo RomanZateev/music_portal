@@ -37,6 +37,13 @@ class DatabaseSeeder extends Seeder
             'Oxxxymiron (Оксимиро́н; настоящее имя — Миро́н Я́нович Фёдоров; род. 31 января 1985 года, Ленинград, РСФСР, СССР) — российский хип-хоп-исполнитель и бывший исполнительный директор букинг-агентства Booking Machine. Один из основателей и бывший участник лейбла Vagabund.'
         ]);
 
+        DB::table('artists')->insert([
+            'name' => 'Оззи Осборн',
+            'image' => 'http://2queens.ru/Uploads/barbara/Ozzy_mainpic.jpg',
+            'biograpy' => 
+            'О́ззи О́сборн (англ. Ozzy Osbourne; настоящее имя — Джон Майкл О́сборн, англ. John Michael Osbourne; род. 3 декабря 1948, Бирмингем) — британский рок-певец, музыкант, один из основателей и участник группы Black Sabbath, оказавшей значительное влияние на появление таких музыкальных стилей, как хард-рок и хеви-метал. Успешность его карьеры и популярность принесли ему неофициальный титул «Крёстный отец хэви-метала».'
+        ]);
+
         factory(Artist::class, 50)->create();
 
         DB::table('songs')->insert([
@@ -98,6 +105,39 @@ class DatabaseSeeder extends Seeder
             ',
         ]);
 
+        DB::table('songs')->insert([
+            'name' => 'Crazy Train',
+            'image' => 'https://t2.genius.com/unsafe/220x220/https%3A%2F%2Fimages.genius.com%2Fa2ec4f2e998ebe97fd3ce7aa2ab07e9c.894x894x1.jpg',
+
+            'text' => 
+            '[Verse 2]
+            Let`s go!
+            I`ve listened to preachers, I`ve listened to fools
+            I`ve watched all the dropouts who make their own rules
+            One person conditioned to rule and control
+            The media sells it and you live the role
+            
+            [Pre-Chorus]
+            Mental wounds still screaming
+            Driving me insane
+            
+            [Chorus]
+            I`m going off the rails on a crazy train
+            I`m going off the rails on a crazy train
+            
+            [Bridge]
+            I know that things are going wrong for me
+            You gotta listen to my words, yeah, yeah!',
+
+            'textAuthor' => 'Ozzy Osbourne',
+            'musicAuthor' => 'Ozzy Osbourne',
+            'album' => 'Blizzard of Ozz',
+
+            'notes' => '
+            «Crazy Train» — песня, написанная Оззи Осборном, Рэнди Роадсом и Бобом Дейсли. Была выпущена как первый сингл Осборна в 1980 году для дебютного альбома Blizzard of Ozz. Песня была написана в 1980 году и позже была включена в концертный альбом Tribute, выпущенный 19 марта 1987 года. 
+            ',
+        ]);
+
         factory(Song::class, 150)->create();
 
         $artists = App\Artist::all();
@@ -120,6 +160,11 @@ class DatabaseSeeder extends Seeder
         DB::table('artist_song')->insert([
             'artist_id' => '2',
             'song_id' => '2'
+        ]);
+
+        DB::table('artist_song')->insert([
+            'artist_id' => '3',
+            'song_id' => '3'
         ]);
 
         Song::all()->each(function ($song) use ($artists) { 
