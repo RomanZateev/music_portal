@@ -11,7 +11,7 @@
                 <input autocomplete="off" type="text" name="name" class='form-control width' value="{!! $user->name !!}">
 
                 <label for="" class="about-form">e-mail</label>
-                <input autocomplete="off" type="text" name="email" class='form-control width' value="{!! $user->email !!}">
+                <input autocomplete="off" type="email" name="email" class='form-control width' value="{!! $user->email !!}">
 
                 <label for="" class="about-form">Тип</label>
                 <select name="type" class="form-control width">

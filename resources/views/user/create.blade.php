@@ -17,10 +17,10 @@
                 </select>
 
                 <label for="" class="about-form">e-mail</label>
-                <input autocomplete="off" type="text" name="email" class='form-control' placeholder="e-mail">
+                <input autocomplete="off" type="email" name="email" class='form-control' placeholder="e-mail">
 
                 <label for="" class="about-form">Пароль</label>
-                <input autocomplete="off" type="text" name="password" class='form-control' placeholder="пароль">
+                <input autocomplete="off" type="password" name="password" class='form-control' placeholder="пароль">
             </div>
             <button class="btn btn-success" type="submit">Добавить</button>
             {{ csrf_field() }}            

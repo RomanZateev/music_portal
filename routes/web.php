@@ -40,7 +40,7 @@ Route::get('/users', 'UserController@all')->name('users');
 Route::get('/user/{id}', 'UserController@show')->name('user');
 //удаление
 Route::delete('user/delete/{user_id}', 'UserController@destroy')->name('user_delete');
-//обновление
+//изменение
 Route::get('user/edit/{user_id}','UserController@edit')->name('user_edit');
 Route::post('user/update', 'UserController@update')->name('user_update');
 //добавление
@@ -58,14 +58,17 @@ Route::get('/artists', 'ArtistsController@all')->name('artists');
 Route::any('/artist/{nameURL}', 'ArtistsController@show')->name('artist');
 //удаление
 Route::delete('artist/delete/{artist_id}', 'ArtistsController@destroy')->name('artist_delete');
-//обновление
+//изменение
 Route::get('artist/edit/{artist_id}','ArtistsController@edit')->name('artist_edit');
-Route::post('artist/update', 'ArtistsController@update')->name('artist_update');
+Route::post('artists/update', 'ArtistsController@update')->name('artists_update');
 //добавление
-Route::get('artist/create','ArtistsController@create')->name('artist_create');
-Route::post('artist/store','ArtistsController@store')->name('artist_store');
+Route::get('artists/create','ArtistsController@create')->name('artists_create');
+Route::post('artists/store','ArtistsController@store')->name('artist_store');
 //поиск артиста по букве
 Route::any('/artists/{letter}', 'ArtistsController@search')->name('search_artist');
+//добавление композиций
+Route::post('/artist/{artist_id}/songs/add', 'ArtistsController@add_song')->name('artist_add_song');
+Route::delete('artist/{artist_id}/songs/{song_id}/delete', 'ArtistsController@delete_song')->name('artist_delete_song');
 
 /*
 |--------------------------------------------------------------------------
