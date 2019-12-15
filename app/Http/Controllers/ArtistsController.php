@@ -66,7 +66,7 @@ class ArtistsController extends Controller
         $artist->save();
     
         return redirect()->route('artists')
-            ->with('success','Book added successfully...');
+            ->with('success','Artist added successfully...');
     }
 
     /**
@@ -124,7 +124,7 @@ class ArtistsController extends Controller
         $artist->save();
     
         return redirect()->route('artists')
-            ->with('success','Book added successfully...');
+            ->with('success','Artist edited successfully...');
     }
 
     /**

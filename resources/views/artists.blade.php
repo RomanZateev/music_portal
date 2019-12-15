@@ -18,7 +18,7 @@
                 @if ($russian ?? '')
                     @foreach ($russian as $letter)
                         <div class="col">
-                            <a class="h4 font-weight-light text-secondary" href="{{ URL::route('search_artist', $letter) }}">
+                            <a class="h4 font-weight-light text-secondary letter" href="{{ URL::route('search_artist', $letter) }}">
                                 {{$letter}}
                             </a>
                         </div>
@@ -34,7 +34,7 @@
                 @if ($english ?? '')
                     @foreach ($english as $letter)
                         <div class="col">
-                            <a class="h4 font-weight-light text-secondary" href="{{ URL::route('search_artist', $letter) }}">
+                            <a class="h4 font-weight-light text-secondary letter" href="{{ URL::route('search_artist', $letter) }}">
                                 {{$letter}}
                             </a>
                         </div>   
@@ -46,7 +46,7 @@
     <div class="row">
         @if ($artists ?? '')
             @forelse ($artists as $artist)
-                <div class="col-2 song-hover pt-2 pb-2 ml-20">
+                <div class="col-2 song-hover pt-2 pb-2 ml-20 shadow">
                     <a class="h4 font-weight-light text-dark" class="" href="{{ URL::route('artist', $artist->id) }}">
                         <div class="row justify-content-md-center">
                             @if ($artist->filename)

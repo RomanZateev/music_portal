@@ -17,32 +17,35 @@
     <script src="https://code.jquery.com/jquery-1.9.1.min.js"></script>
 
     <script>
-        $(document).ready(function() {
-            console.log( "document loaded" );
+        $(document).ready(function(){
 
-            $('a.heart').click(function(){
-                console.log( "SALAM" );
+            console.log("document loaded"),
 
-                var song = $(this).attr("id");
-                console.log(song);
+            console.log('done'),
 
-                $.ajax({    
-                    type: 'POST',
-                    url: '/like',
-                    data: {
-                        id: song,
-                        _token : '{{ csrf_token() }}',
-                    },
-                    success:function(response){
-                        alert(response.message);
-                    },
-                    error: function (xhr, ajaxOptions, thrownError) {
-                        alert(xhr.responseText);
-                    }
-                });
+            $('.rounded ').hover(makeBigger, returnToOriginalSize);
+
+            function makeBigger() {
+                $(this).css({height: '+=5%', width: '+=5%'});
+            }
+            function returnToOriginalSize() {
+                $(this).css({height: "", width: ""});
+            }
+
+            $('.letter ').hover(makeBiggerLetter, returnToOriginalSizeLetter);
+
+            function makeBiggerLetter() {
+                $(this).css(font-weight:'Bold';);
+            }
+            function returnToOriginalSizeLetter() {
+                $(this).css(font-weight:"";);
+            }
+
+            $(".shadow").hover(function()
+            { 
+                $(this).toggleClass('classWithShadow');
             });
         });
-
     </script>
 
     <!-- Fonts -->

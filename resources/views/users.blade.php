@@ -8,16 +8,16 @@
     </div>
     <div class="row">
         <div class="col-1">
-            <div class="h2 font-weight-bold">№</div>
+            <div class="h4 font-weight-bold">№</div>
         </div>
         <div class="col-3">
-            <div class="h2 font-weight-bold">Имя пользователя</div>
+            <div class="h4 font-weight-bold">Имя пользователя</div>
         </div>
         <div class="col-1">
-            <div class="h2 font-weight-bold">Тип</div>
+            <div class="h4 font-weight-bold">Тип</div>
         </div>
         <div class="col-4">
-            <div class="h2 font-weight-bold">e-mail</div>
+            <div class="h4 font-weight-bold">e-mail</div>
         </div>
     </div>
     @if ($users ?? '')

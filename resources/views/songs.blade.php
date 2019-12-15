@@ -5,13 +5,13 @@
 <div class="container">
     <div class="row">
         <div class="col-2">
-            <div class="h2 font-weight-bold">№</div>
+            <div class="h4 font-weight-bold">№</div>
         </div>
         <div class="col-5">
-            <div class="h2 font-weight-bold">Треки</div>
+            <div class="h4 font-weight-bold">Треки</div>
         </div>
         <div class="col-5">
-            <div class="h2 font-weight-bold">Исполнители</div>
+            <div class="h4 font-weight-bold">Исполнители</div>
         </div>
     </div>
     @if ($songs ?? '')

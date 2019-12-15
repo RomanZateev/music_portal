@@ -4,7 +4,7 @@
 <div class="container bg-white">
     <div class="row mt-4 pt-2">
         <div class="col">
-            <div class="row h2 font-weight-bold">
+            <div class="row h4 font-weight-bold justify-content-md-center">
                 Дорогие Друзья, посетители нашего сайта!
             </div>
             <div class="row h4 font-weight-light text-secondary">

@@ -42,3 +42,9 @@
     max-width: 500px!important;
     max-height: 500px!important;
   }
+
+  .classWithShadow{
+    -moz-box-shadow: 3px 3px 4px #000!important; 
+    -webkit-box-shadow: 3px 3px 4px #000!important; 
+    box-shadow: 3px 3px 4px #000!important; 
+  }
