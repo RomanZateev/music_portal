@@ -80,7 +80,7 @@
                                         <select name="song_id" class="form-control">
                                             @foreach ($songs as $song)
                                                 <option value="{{$song->id}}">{{$song->name}}</option>
-                                            @endf   oreach
+                                            @endforeach
                                         </select>
         
                                         <input type="hidden" name="artist_id" value="{!! $artist->id !!}">
