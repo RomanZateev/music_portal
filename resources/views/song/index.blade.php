@@ -24,10 +24,11 @@
                 @if ($song->musicAuthor)
                     <div class="h4 font-weight-bold">Автор музыки: {{$song->musicAuthor}}</div>
                 @endif
+                <!--
                 <a href="" class="heart" id="{{$song->id}}">
                     <img class="image_on" src="/storage/app/img/actions/heart.png" alt="heart">
                     <img class="image_off" src="/storage/app/img/actions/heart-active.png" alt="heart-active">
-                </a>
+                </a>-->
             </div>
         </div>
         <div class="row bg-white mt-4 pt-2">
