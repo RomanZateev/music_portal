@@ -9,6 +9,9 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\File;
+
 class ArtistsController extends Controller
 {
     private $russian = ['A', 'Б', 'В', 'Г', 'Д', 'Е', 'Ж', 'З', 'И', 'К', 'Л', 'М', 'Н', 'О', 'П', 'Р', 'С', 'Т', 'У', 'Ф', 'Х', 'Ц', 'Ч', 'Ш', 'Щ', 'Э', 'Ю', 'Я'];
@@ -45,27 +48,25 @@ class ArtistsController extends Controller
     {
         $this->validate($request, [
             'name' => 'required|max:255',
-            'biograpy' => 'required'
+            'biograpy' => 'required',
+            //'file' => 'required|mimes:jpeg,jpg,png|max:2048',
         ]);
         
-        Artist::create($request->all());
-
-        if ($request->hasFile('imageServer')) {
-            $image      = $request->file('imageServer');
-            $fileName   = $request->input('id') . '.' . $image->getClientOriginalExtension();
-
-            $img = Image::make($image->getRealPath());
-            $img->resize(300, 300, function ($constraint) {
-                $constraint->aspectRatio();                 
-            });
-
-            $img->stream(); // <-- Key point
-
-            //dd();
-            Storage::disk('local')->put('app/img/artists/'.$fileName, $img, 'public');
-        }
-
-        return redirect()->route('artists');
+        $cover = $request->file('file');
+        $extension = $cover->getClientOriginalExtension();
+        Storage::disk('public')->put($cover->getFilename().'.'.$extension,  File::get($cover));
+    
+        $artist = new Artist();
+        $artist->name = $request->name;
+        $artist->image = $request->image;
+        $artist->biograpy = $request->biograpy;
+        $artist->mime = $cover->getClientMimeType();
+        $artist->original_filename = $cover->getClientOriginalName();
+        $artist->filename = $cover->getFilename().'.'.$extension;
+        $artist->save();
+    
+        return redirect()->route('artists')
+            ->with('success','Book added successfully...');
     }
 
     /**
@@ -105,18 +106,25 @@ class ArtistsController extends Controller
     {
         $this->validate($request, [
             'name' => 'required|max:255',
-            'image' => 'required|max:255',
-            'biograpy' => 'required'
+            'biograpy' => 'required',
+            //'file' => 'required|mimes:jpeg,jpg,png|max:2048',
         ]);
-
-        $data = $request->all();
-        $user = Artist::find($data['id']);
-        $user->fill($data);
-        $user->save();
-
-        //картинка
         
-        return redirect()->route('artists');
+        $cover = $request->file('file');
+        $extension = $cover->getClientOriginalExtension();
+        Storage::disk('public')->put($cover->getFilename().'.'.$extension,  File::get($cover));
+    
+        $artist = Artist::find($request->id);
+        $artist->name = $request->name;
+        $artist->image = $request->image;
+        $artist->biograpy = $request->biograpy;
+        $artist->mime = $cover->getClientMimeType();
+        $artist->original_filename = $cover->getClientOriginalName();
+        $artist->filename = $cover->getFilename().'.'.$extension;
+        $artist->save();
+    
+        return redirect()->route('artists')
+            ->with('success','Book added successfully...');
     }
 
     /**

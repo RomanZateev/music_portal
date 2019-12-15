@@ -94,36 +94,3 @@ Route::any('/search',function(Request $request){
     else 
         return view('songs', ['message' => 'Ничего не найдено']);
 });
-
-// лайк на композицию ...
-Route::post('/like', function(Request $request){
-
-    $like = Like::where([
-        ['user_id', Auth::id()],
-        ['song_id,', $id]
-    ])->get();
-
-    $like = new Like;
-    $song = Song::where('id', $id) -> first();
-
-    $like->song_id = $song->id;
-    $like->user_id = Auth::id();
-
-    $flight->save();
-
-    if (count($like) == 1) 
-        $like->delete();   
-    else{
-
-        $like = new Like;
-        $song = Song::where('id', $id) -> first();
-
-        $like->song_id = $song->id;
-        $like->user_id = Auth::id();
-
-        $flight->save();
-    }
-    
-    return abort(404);
-
-})->name('like');

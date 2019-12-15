@@ -5,7 +5,7 @@
 
 <div class="container">
     <div class="row">
-        <form method="POST" action="{{route('artist_store')}}">
+        <form method="POST" action="{{route('artist_store')}}" enctype="multipart/form-data">
             <div class="bootstrap-iso form-group">
                 <label for="" class="about-form">Псевдоним</label>
                 <input autocomplete="off" type="text" name="name" class='form-control' placeholder="Псевдоним">
@@ -17,7 +17,7 @@
                 <input autocomplete="off" type="url" name="image" class='form-control' placeholder="Ссылка">
 
                 <label for="" class="about-form">Изображение</label>
-                <input type="file" name="imageServer" class='form-control-file'>
+                <input type="file" class="form-control" name="file"/>
 
             </div>
             <button class="btn btn-success" type="submit">Добавить</button>

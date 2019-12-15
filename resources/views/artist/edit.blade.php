@@ -5,7 +5,7 @@
 
 <div class="container">
     <div class="row">
-        <form method="POST" action="{{route('artists_update')}}">
+        <form method="POST" action="{{route('artists_update')}}" enctype="multipart/form-data">
             <div class="bootstrap-iso form-group">
                 <label for="" class="about-form">Псевдоним</label>
                 <input autocomplete="off" type="text" name="name" class='form-control' placeholder="Псевдоним" value="{!! $artist->name !!}">
@@ -15,17 +15,11 @@
                     {!! $artist->biograpy!!}
                 </textarea>
 
-                <label for="" class="about-form">Изображение ссылка</label>
-                @if ($artist->image)
-                    <img src="{{$artist->image}}" alt="" width="300" height="300">
-                @endif
+                <label for="" class="about-form">Cсылка на изображение</label>
                 <input autocomplete="off" type="url" name="image" class='form-control' placeholder="Ссылка" value="{!! $artist->image !!}">
 
                 <label for="" class="about-form">Изображение</label>
-                @if ($artist->image)
-                    <img src="{{$artist->imageServer}}" alt="" width="300" height="300">
-                @endif
-                <input type="file" name="imageServer" class='form-control-file'>
+                <input type="file" name="file" class='form-control-file'>
 
                 <input type="hidden" name="id" value="{!! $artist->id !!}">
             </div>

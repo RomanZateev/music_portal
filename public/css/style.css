@@ -37,3 +37,8 @@
     max-width: 900px!important;
     width: 400px!important;
   }
+
+  .image{
+    max-width: 500px!important;
+    max-height: 500px!important;
+  }

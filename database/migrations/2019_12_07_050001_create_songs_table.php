@@ -18,7 +18,6 @@ class CreateSongsTable extends Migration
             $table->string('name');
             $table->text('text');
             $table->text('image')->nullable();
-            $table->text('imageServer')->nullable();
             $table->text('notes')->nullable();
             $table->string('textAuthor')->nullable();
             $table->string('musicAuthor')->nullable();

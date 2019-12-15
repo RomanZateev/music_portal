@@ -25,10 +25,10 @@
         <div class="row">
             <div class="col-md-8 bg-white mr-2">
                 <div class="row justify-content-md-center pt-2">
-                    @if ($artist->imageServer)
-                        <img src="{{$artist->imageServer}}" class="rounded img-front" alt="{{$artist->name}}" class="img-front">
+                    @if ($artist->filename)
+                        <img class="card-img-top image" src="{{url('public/uploads/'.$artist->filename)}}" alt="{{$artist->filename}}">
                     @else
-                        <img src="{{$artist->image}}" class="rounded img-front" alt="{{$artist->name}}" class="img-front">
+                        <img src="{{$artist->image}}" class="rounded img-front image" alt="{{$artist->name}}" class="img-front">
                     @endif
                 </div>
                 <div class="row justify-content-md-center pt-2">

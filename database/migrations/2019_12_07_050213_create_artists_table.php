@@ -17,8 +17,11 @@ class CreateArtistsTable extends Migration
             $table->bigIncrements('id');
             $table->string('name');
             $table->text('image')->nullable();
-            $table->text('imageServer')->nullable();
-            $table->text('biograpy')->nullable();;
+            $table->text('biograpy')->nullable();
+
+            $table->string('filename')->nullable();
+            $table->string('mime')->nullable();
+            $table->string('original_filename')->nullable();
         });
     }
 
