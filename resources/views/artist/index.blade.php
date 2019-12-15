@@ -57,31 +57,40 @@
                                     {{$song->name}}
                                 </div>
                             </a>
-                            <form class="form-horizontal" action="{{ route('artist_delete_song',['song_id'=>$song->id, 'artist_id'=>$artist->id]) }}" method="post">
-                                {{method_field('DELETE')}}
-                                {{ csrf_field() }}
-                                <button class="btn btn-danger" type="submit">Удалить</button>
-                            </form>
+                            @if (auth()->check())
+                                @if (auth()->user()->isAdmin())
+                                    <form class="form-horizontal" action="{{ route('artist_delete_song',['song_id'=>$song->id, 'artist_id'=>$artist->id]) }}" method="post">
+                                        {{method_field('DELETE')}}
+                                        {{ csrf_field() }}
+                                        <button class="btn btn-danger" type="submit">Удалить</button>
+                                    </form>
+                                @endif
+                            @endif
                         @empty
                             <div class="h4 font-weight-light text-dark song-hover border-bottom pt-2 pb-2">
                                 У исполнителя еще нет композиций
                             </div>
                         @endforelse
-                        <div class="pt-3">
-                            <form method="POST" action="{{route('artist_add_song', $artist->id)}}">
 
-                                <select name="song_id" class="form-control">
-                                    @foreach ($songs as $song)
-                                        <option value="{{$song->id}}">{{$song->name}}</option>
-                                    @endforeach
-                                </select>
-
-                                <input type="hidden" name="artist_id" value="{!! $artist->id !!}">
-
-                                <button class="btn btn-success" type="submit">Добавить композицию</button>
-                                {{ csrf_field() }} 
-                            </form>
-                        </div>
+                        @if (auth()->check())
+                            @if (auth()->user()->isAdmin())
+                                <div class="pt-3">
+                                    <form method="POST" action="{{route('artist_add_song', $artist->id)}}">
+        
+                                        <select name="song_id" class="form-control">
+                                            @foreach ($songs as $song)
+                                                <option value="{{$song->id}}">{{$song->name}}</option>
+                                            @endf   oreach
+                                        </select>
+        
+                                        <input type="hidden" name="artist_id" value="{!! $artist->id !!}">
+        
+                                        <button class="btn btn-success" type="submit">Добавить композицию</button>
+                                        {{ csrf_field() }} 
+                                    </form>
+                                </div>
+                            @endif
+                        @endif
                     </div>
                 </div>
             </div>
