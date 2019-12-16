@@ -30,7 +30,11 @@
   }
 
   .song-hover:hover {
-    background-color: #F5F5F5!important;
+    background-color: #FF9CFF!important;
+  }
+
+  .song-hover{
+    font-family: "Monotype Corsiva" Cursive!important;
   }
 
   input{
@@ -49,6 +53,57 @@
     box-shadow: 3px 3px 4px #000!important; 
   }
 
-  .height{
-    min-height: 500px!important;
+  main{
+    min-height: 550px!important;
+  }
+  
+  .font{
+    font-family: Spotify Circular,Helvetica,sans-serif!important;
+  }
+
+  .heading{
+    font-family: Programme, sans-serif!important;
+    font-weight: normal!important;
+  }
+
+  .zoom:hover {
+    transform: scale(1.1);
+  }
+
+  @import url(https://fonts.googleapis.com/css?family=Dosis:300,400);
+
+  a.effect-underline{
+    color: #fff;
+    font-size: 2em;
+    text-decoration: none;
+    display: inline-block;
+    position: relative;
+    font-family: 'Dosis', sans-serif;
+  }
+  
+  /*effect-underline*/
+  a.effect-underline:after {
+    content: '';
+    position: absolute;
+    left: 0;
+    display: inline-block;
+    height: 1em;
+    width: 100%;
+    border-bottom: 1px solid;
+    margin-top: 10px;
+    opacity: 0;
+    -webkit-transition: opacity 0.35s, -webkit-transform 0.35s;
+    transition: opacity 0.35s, transform 0.35s;
+    -webkit-transform: scale(0,1);
+    transform: scale(0,1);
+  }
+  
+  a.effect-underline:hover:after {
+    opacity: 1;
+    -webkit-transform: scale(1);
+    transform: scale(1);
+  }
+
+  main {
+    font-family: 'Courier Prime', monospace!important;
   }

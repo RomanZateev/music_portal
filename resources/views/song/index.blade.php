@@ -3,9 +3,9 @@
 @section('content')
 <div class="container">
     @if ($song)
-        <div class="row bg-white">
-            <div class="col-4 m-2">
-                <img src="{{$song->image}}" class="rounded img-front" width="300" height="300" alt="{{$song->name}}">
+        <div class="row bg-white rounded">
+            <div class="col-md-auto m-2">
+                <img src="{{$song->image}}" class="rounded img-front image zoom" width="300" height="300" alt="{{$song->name}}">
             </div>
             <div class="col col-auto m-2">
                 <div class="h2 font-weight-bold">{{$song->name}}</div>
@@ -31,12 +31,14 @@
                 </a>-->
             </div>
         </div>
-        <div class="row bg-white mt-4 pt-2">
+        <div class="row bg-white mt-4 pt-4 rounded">
             <div class="col">
-                <div class="h4 font-weight-light text-secondary">{!! nl2br(e($song->text)) !!}</div>
+                <div class="h3">
+                    {!! nl2br(e($song->text)) !!}
+                </div>
             </div>
         </div>
-        <div class="row bg-white mt-4">
+        <div class="row bg-white mt-4 rounded">
             @if ($song->notes)
                 <div class="col">
                     <div class="row">

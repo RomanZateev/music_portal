@@ -18,7 +18,7 @@
                 @if ($russian ?? '')
                     @foreach ($russian as $letter)
                         <div class="col">
-                            <a class="h4 font-weight-light text-secondary letter" href="{{ URL::route('search_artist', $letter) }}">
+                            <a class="h4 text-secondary effect-underline" href="{{ URL::route('search_artist', $letter) }}">
                                 {{$letter}}
                             </a>
                         </div>
@@ -34,7 +34,7 @@
                 @if ($english ?? '')
                     @foreach ($english as $letter)
                         <div class="col">
-                            <a class="h4 font-weight-light text-secondary letter" href="{{ URL::route('search_artist', $letter) }}">
+                            <a class="h4 text-secondary effect-underline" href="{{ URL::route('search_artist', $letter) }}">
                                 {{$letter}}
                             </a>
                         </div>   
@@ -50,9 +50,9 @@
                     <a class="h4 font-weight-light text-dark" class="" href="{{ URL::route('artist', $artist->id) }}">
                         <div class="row justify-content-md-center">
                             @if ($artist->filename)
-                                <img class="rounded-circle" src="{{url('public/uploads/'.$artist->filename)}}" alt="{{$artist->filename}}" width="150" height="150">
+                                <img class="rounded-circle zoom" src="{{url('public/uploads/'.$artist->filename)}}" alt="{{$artist->filename}}" width="150" height="150">
                             @else
-                                <img src="{{$artist->image}}" class="rounded-circle" alt="{{$artist->name}}" width="150" height="150">
+                                <img src="{{$artist->image}}" class="rounded-circle zoom" alt="{{$artist->name}}" width="150" height="150">
                             @endif
                         </div>
 

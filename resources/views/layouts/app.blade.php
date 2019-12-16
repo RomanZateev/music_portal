@@ -21,36 +21,37 @@
 
             console.log("document loaded"),
 
-            console.log('done'),
-
-            $('.rounded ').hover(makeBigger, returnToOriginalSize);
+            $('.track-line').hover(makeBigger, returnToOriginalSize);
 
             function makeBigger() {
                 $(this).css({height: '+=5%', width: '+=5%'});
             }
+
             function returnToOriginalSize() {
                 $(this).css({height: "", width: ""});
-            }
-
-            $('.letter ').hover(makeBiggerLetter, returnToOriginalSizeLetter);
-
-            function makeBiggerLetter() {
-                $(this).css(font-weight:'Bold';);
-            }
-            function returnToOriginalSizeLetter() {
-                $(this).css(font-weight:"";);
             }
 
             $(".shadow").hover(function()
             { 
                 $(this).toggleClass('classWithShadow');
-            });
+            })
+
+            $('li.nav-item:not(.dropdown)').hover(white, returnBlue);
+
+            function white () {
+                $(this).addClass('bg-white rounded');
+            }
+
+            function returnBlue () {
+                $(this).removeClass('bg-white rounded');
+            }
         });
     </script>
 
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Courier+Prime&display=swap" rel="stylesheet">
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
@@ -61,15 +62,13 @@
 </head>
 <body>
     <div id="app">
-        <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
+        <nav class="navbar navbar-expand-md navbar-light bg-info shadow-sm h5">
             <div class="container">
                 <a class="navbar-brand" href="{{ url('/') }}">
-                    <img src="/storage/app/img/logo.png" alt="" height="50" width="50">
-                    The lyrics
+                    <div class="d-inline-block">
+                        <img src="/storage/app/img/logo.png" alt="" height="60" width="60">
+                    </div>
                 </a>
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
 
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <!-- Left Side Of Navbar -->
@@ -103,7 +102,6 @@
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="{{ route('artists') }}">Исполнители</a>
-                            
                         </li>
                         <!-- Authentication Links -->
                         @guest
@@ -143,9 +141,9 @@
             @yield('content')
         </main>
 
-        <footer class="py-4 mt-4 bg-white text-black-50">
+        <footer class="py-4 mt-4 text-black-50 bg-info">
             <div class="container text-center">
-                <a href="https://soundcloud.com/traphustler" class="h5 nounderline text-dark"> 2019 Roman: SoundCloud.com</a>
+                <a href="https://vk.com/traphustler" class="h5 nounderline text-dark"> 2019 Roman: VK.com</a>
             </div>
         </footer>
     </div>

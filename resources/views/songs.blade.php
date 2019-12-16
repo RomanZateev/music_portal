@@ -5,19 +5,19 @@
 <div class="container">
     <div class="row">
         <div class="col-2">
-            <div class="h4 font-weight-bold">№</div>
+            <div class="h4 font-weight-bold heading">№</div>
         </div>
         <div class="col-5">
-            <div class="h4 font-weight-bold">Треки</div>
+            <div class="h4 font-weight-bold heading">Треки</div>
         </div>
         <div class="col-5">
-            <div class="h4 font-weight-bold">Исполнители</div>
+            <div class="h4 font-weight-bold heading">Исполнители</div>
         </div>
     </div>
     @if ($songs ?? '')
         @foreach ($songs as $song)
             <a class="h4 font-weight-light text-secondary" href="{{ URL::route('song', $song->id) }}">
-                <div class="row song-hover border-bottom">
+                <div class="row song-hover border-bottom rounded track-line">
                     <div class="col-2 pt-3 pb-2">
                         <div class="h4 font-weight-light text-secondary">
                             {{ ($songs ->currentpage()-1) * $songs ->perpage() + $loop->index + 1 }}
