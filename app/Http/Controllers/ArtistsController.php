@@ -25,7 +25,7 @@ class ArtistsController extends Controller
      */
     public function index()
     {
-        return view('artist/index');
+        return view('artist.index');
     }
 
     /**
@@ -35,7 +35,7 @@ class ArtistsController extends Controller
      */
     public function create()
     {
-        return view('artist/create', ['songs' => Song::all()]);
+        return view('artist.create');
     }
 
     /**
@@ -53,16 +53,23 @@ class ArtistsController extends Controller
         ]);
         
         $cover = $request->file('file');
-        $extension = $cover->getClientOriginalExtension();
-        Storage::disk('public')->put($cover->getFilename().'.'.$extension,  File::get($cover));
+
+        if ($cover){
+            $extension = $cover->getClientOriginalExtension();
+            Storage::disk('public')->put($cover->getFilename().'.'.$extension,  File::get($cover));
+        }
     
         $artist = new Artist();
         $artist->name = $request->name;
         $artist->image = $request->image;
         $artist->biograpy = $request->biograpy;
-        $artist->mime = $cover->getClientMimeType();
-        $artist->original_filename = $cover->getClientOriginalName();
-        $artist->filename = $cover->getFilename().'.'.$extension;
+
+        if ($cover){
+            $artist->mime = $cover->getClientMimeType();
+            $artist->original_filename = $cover->getClientOriginalName();
+            $artist->filename = $cover->getFilename().'.'.$extension;
+        }
+
         $artist->save();
     
         return redirect()->route('artists')
@@ -80,7 +87,7 @@ class ArtistsController extends Controller
         $artist = Artist::where('id', $id) -> first();
 
         if ($artist) 
-            return view('artist/index', ['artist' => $artist, 'songs' => Song::all()]);
+            return view('artist.index', ['artist' => $artist, 'songs' => Song::all()]);
         else abort(404);
     }
 
@@ -92,7 +99,7 @@ class ArtistsController extends Controller
      */
     public function edit($id)
     {
-        return view('artist/edit', ['artist' => Artist::where('id', $id)->first()]);
+        return view('artist.edit', ['artist' => Artist::where('id', $id)->first()]);
     }
 
     /**
@@ -111,20 +118,26 @@ class ArtistsController extends Controller
         ]);
         
         $cover = $request->file('file');
-        $extension = $cover->getClientOriginalExtension();
-        Storage::disk('public')->put($cover->getFilename().'.'.$extension,  File::get($cover));
+        
+        if ($cover){
+            $extension = $cover->getClientOriginalExtension();
+            Storage::disk('public')->put($cover->getFilename().'.'.$extension,  File::get($cover));
+        }
     
         $artist = Artist::find($request->id);
         $artist->name = $request->name;
         $artist->image = $request->image;
         $artist->biograpy = $request->biograpy;
-        $artist->mime = $cover->getClientMimeType();
-        $artist->original_filename = $cover->getClientOriginalName();
-        $artist->filename = $cover->getFilename().'.'.$extension;
+
+        if ($cover){
+            $artist->mime = $cover->getClientMimeType();
+            $artist->original_filename = $cover->getClientOriginalName();
+            $artist->filename = $cover->getFilename().'.'.$extension;
+        }
+
         $artist->save();
     
-        return redirect()->route('artists')
-            ->with('success','Artist edited successfully...');
+        return redirect()->route('artist', ['artist_id' => $request->id]);
     }
 
     /**

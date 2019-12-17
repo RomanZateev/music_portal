@@ -7,7 +7,7 @@
         @if (auth()->user()->isAdmin())
             <div class="row">
                 <div class="col">
-                    <a class="btn btn-success text-white" href="{{URL::route('artists_create')}}">Добавить исполнителя</a>
+                    <a class="btn btn-success text-white btn-lg mb-4" href="{{URL::route('artists_create')}}">Добавить исполнителя</a>
                 </div>
             </div>
         @endif

@@ -2,8 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Artist;
 use App\Song;
 use Illuminate\Http\Request;
+
+use Illuminate\Support\Facades\DB;
+use App\Http\Controllers\Controller;
 
 class SongsController extends Controller
 {
@@ -24,7 +28,7 @@ class SongsController extends Controller
      */
     public function create()
     {
-        //
+        return view('song.create');
     }
 
     /**
@@ -35,7 +39,14 @@ class SongsController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this->validate($request, [
+            'name' => 'required|max:255',
+            'text' => 'required'
+        ]);
+
+        Song::create($request->all());
+
+        return redirect()->route('songs');
     }
 
     /**
@@ -49,9 +60,8 @@ class SongsController extends Controller
         $song = Song::where('id', $id) -> first();
 
         if ($song) 
-            return view('song/index', ['song' => $song]);
-        else 
-            abort(404);
+            return view('song.index', ['song' => $song, 'artists' => Artist::all()]);
+        else abort(404);
     }
 
     /**
@@ -62,7 +72,7 @@ class SongsController extends Controller
      */
     public function edit($id)
     {
-        //
+        return view('song.edit', ['song' => Song::where('id', $id)->first()]);
     }
 
     /**
@@ -72,9 +82,19 @@ class SongsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request)
     {
-        //
+        $this->validate($request, [
+            'name' => 'required|max:255',
+            'text' => 'required'
+        ]);
+
+        $data = $request->all();
+        $user = Song::find($data['id']);
+        $user->fill($data);
+        $user->save();
+
+        return redirect()->route('song', ['song_id' => $request->id]);
     }
 
     /**
@@ -85,6 +105,55 @@ class SongsController extends Controller
      */
     public function destroy($id)
     {
-        //
+        Song::find($id)->delete();
+        return redirect()->route('songs');
+    }
+
+
+    public function search(Request $request)
+    {
+        $songs = Song::where('name','LIKE', $request -> input('q').'%')->orderBy('name')->paginate(25);
+
+        if(count($songs) > 0)
+            return view('songs', ['songs' => $songs]);
+        else 
+            return view('songs', ['message' => 'Ничего не найдено']);
+    }
+
+    public function all()
+    {    
+        return view('songs', ['songs' => Song::orderBy('name')->paginate(25)]);
+    }
+
+    public function add_artist(Request $request)
+    {
+        $data = $request->all();
+
+        $artist = DB::table('artist_song')
+        ->where('artist_id', $data['artist_id'])
+        ->where('song_id', $data['song_id'])
+        ->first();
+
+        if (!$artist)
+        {
+            DB::table('artist_song')->insert(
+                [
+                    'artist_id' => $data['artist_id'], 
+                    'song_id' => $data['song_id']
+                ]
+            );
+        }
+
+        return back();
+    }
+
+    public function delete_artist($song_id, $artist_id)
+    {
+        DB::table('artist_song')
+        ->where('song_id', '=', $song_id)
+        ->where('artist_id', '=', $artist_id)
+        ->delete();
+
+        return back();
     }
 }

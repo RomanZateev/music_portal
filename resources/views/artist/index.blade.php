@@ -10,13 +10,13 @@
                         <form class="form-horizontal" action="{{ route('artist_delete',['artist_id'=>$artist->id]) }}" method="post">
                             {{method_field('DELETE')}}
                             {{ csrf_field() }}
-                            <button class="btn btn-danger" type="submit">Удалить</button>
+                            <button class="btn btn-danger btn-lg" type="submit">Удалить</button>
                         </form>
                     </div>
                     <div class="col">
                         <form class="form-horizontal" action="{{ route('artist_edit',['artist_id'=>$artist->id]) }}" method="get">
                             {{ csrf_field() }}
-                            <button class="btn btn-warning" type="submit">Редактировать</button>
+                            <button class="btn btn-warning btn-lg" type="submit">Редактировать</button>
                         </form>
                     </div>
                 @endif

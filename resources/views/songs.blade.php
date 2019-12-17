@@ -3,6 +3,15 @@
 @section('content')
 
 <div class="container">
+    @if (auth()->check())
+        @if (auth()->user()->isAdmin())
+            <div class="row">
+                <div class="col">
+                    <a class="btn btn-success text-white btn-lg mb-4" href="{{URL::route('songs_create')}}">Добавить композицию</a>
+                </div>
+            </div>
+        @endif
+    @endif
     <div class="row">
         <div class="col-2">
             <div class="h4 font-weight-bold heading">№</div>

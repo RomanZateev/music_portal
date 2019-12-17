@@ -74,7 +74,7 @@
                     <!-- Left Side Of Navbar -->
                     <ul class="navbar-nav mr-auto">
                         <div class="">
-                            <form class="form-inline my-2 my-lg-0 ml-auto" action="/search" method="POST" accept-charset="UTF-8">
+                            <form class="form-inline my-2 my-lg-0 ml-auto" action="{{route('search_song')}}" method="POST" accept-charset="UTF-8">
                                 {{ csrf_field() }}
                                 <input class="form-control" type="search" name="q" placeholder="Композиция..." aria-label="Search">
                                 <div class="input-group-append">
@@ -96,13 +96,14 @@
                                 </li>
                             @endif
 
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ route('songs') }}">Композиции</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ route('artists') }}">Исполнители</a>
+                            </li>
+
                         @endif
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{ route('songs') }}">Композиции</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{ route('artists') }}">Исполнители</a>
-                        </li>
                         <!-- Authentication Links -->
                         @guest
                             <li class="nav-item">

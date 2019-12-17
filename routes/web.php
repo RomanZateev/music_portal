@@ -76,21 +76,20 @@ Route::delete('artist/{artist_id}/songs/{song_id}/delete', 'ArtistsController@de
 |--------------------------------------------------------------------------
 */
 //композиции
-Route::get('/songs', function(Request $request){
-
-    return view('songs', ['songs' => Song::orderBy('name')->paginate(25)]);
-
-})->name('songs');
+Route::get('/songs', 'SongsController@all')->name('songs');
 // отображение
-Route::get('/song/{id}', 'SongsController@show')->name('song');
+Route::get('/song/{song_id}', 'SongsController@show')->name('song');
+//удаление
+Route::delete('song/delete/{song_id}', 'SongsController@destroy')->name('song_delete');
+//изменение
+Route::get('song/edit/{song_id}','SongsController@edit')->name('song_edit');
+Route::post('songs/update', 'SongsController@update')->name('song_update');
+//добавление
+Route::get('songs/create','SongsController@create')->name('songs_create');
+Route::post('songs/store','SongsController@store')->name('song_store');
 
+//добавление артистов
+Route::post('/song/{song_id}/artists/add', 'SongsController@add_artist')->name('song_add_artist');
+Route::delete('song/{song_id}/artists/{artist_id}/delete', 'SongsController@delete_artist')->name('song_delete_artist');
 //поиск композиции
-Route::any('/search',function(Request $request){
-    
-    $songs = Song::where('name','LIKE', $request -> input('q').'%')->orderBy('name')->paginate(25);
-
-    if(count($songs) > 0)
-        return view('songs', ['songs' => $songs]);
-    else 
-        return view('songs', ['message' => 'Ничего не найдено']);
-});
+Route::any('/search', 'SongsController@search')->name('search_song');

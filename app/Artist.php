@@ -8,7 +8,6 @@ class Artist extends Model
 {
     public $timestamps = false;
 
-
     protected $fillable = [
         'name', 'nameURL', 'image', 'biograpy'
     ];
