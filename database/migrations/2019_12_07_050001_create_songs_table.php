@@ -22,7 +22,6 @@ class CreateSongsTable extends Migration
             $table->string('textAuthor')->nullable();
             $table->string('musicAuthor')->nullable();
             $table->string('album')->nullable();
-            $table->string('video')->nullable();
         });
     }
 

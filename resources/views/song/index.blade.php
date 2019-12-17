@@ -104,18 +104,6 @@
                 </div>
             @endif
         </div>
-        @if ($song->video)
-            <div class="row bg-white mt-4">
-                <div class="col">
-                    <div class="row">
-                        <div class="col h4 font-weight-light">Клип:</div>
-                    </div>
-                    <div class="row m-1">
-                        <iframe width="560" height="315" src="{{$song->video}}" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-                    </div>  
-                </div>
-            </div>
-        @endif
     @endif
 </div>
 @endsection

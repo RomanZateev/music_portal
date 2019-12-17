@@ -97,7 +97,6 @@ class DatabaseSeeder extends Seeder
             'textAuthor' => 'ЛСП',
             'musicAuthor' => 'ЛСП',
             'album' => 'Magic City',
-            'video' => 'https://www.youtube.com/embed/GRvRIS--JRo',
 
             'notes' => '
             Еще одна версия песни ЛСП "Безумие", теперь, с участием Oxxxymiron.
