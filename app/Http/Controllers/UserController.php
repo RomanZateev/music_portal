@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\User;
+use Auth;
+use App\Like;
+use App\Song;
 use Illuminate\Http\Request;
 
 class UserController extends Controller
@@ -54,12 +57,23 @@ class UserController extends Controller
      * @param  \App\User  $user
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show()
     {
-        $user = User::where('id', $id) -> first();
+        $likes = Like::select('song_id')->where('user_id', Auth::id());
 
-        if ($user) return view('user', ['user' => $user]);
-        else abort(404);
+        $songs = Song::whereIn('id', $likes) ->orderBy('name')->paginate(25);
+        
+        return view('user/edit', ['user' => User::where('id', Auth::id())->first(), 'songs' => $songs]);
+
+        //добавить пагинацию
+        // if (count($songs) > 0)
+        //     return view('user/edit', ['user' => User::where('id', Auth::id())->first(), 'songs' => $songs] );
+        // else abort(404);
+
+        // if ($user) return view('user', ['user' => $user]);
+        // else abort(404);
+
+        //return view('user/edit', ['user' => $user]);
     }
 
     /**
@@ -68,9 +82,23 @@ class UserController extends Controller
      * @param  \App\User  $user
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
-    {        
-        return view('user/edit', ['user' => User::where('id', $id)->first()]);
+    public function edit($user_id)
+    {
+        $likes = Like::where('user_id', $user_id);
+
+        foreach ($likes as $like)
+        {
+            $songs = array_merge($songs, Song::where('id', $like -> song_id)->toarray())->orderBy('name')->paginate(25);
+        }
+
+        // $songs = Song::where('name','LIKE', $request -> input('q').'%')->orderBy('name')->paginate(25);
+
+        // if(count($songs) > 0)
+        //     return view('songs', ['songs' => $songs]);
+        // else 
+        //     return view('songs', ['message' => 'Ничего не найдено']);
+
+        return view('user/edit', ['user' => User::where('id', $id)->first(), 'songs' => count($likes)]);
     }
 
     /**
@@ -84,8 +112,7 @@ class UserController extends Controller
     {
         $this->validate($request, [
             'name' => 'required|max:255',
-            'email' => 'required|max:255',
-            'type' => 'required|max:255'
+            'email' => 'required|max:255'
         ]);
 
         $data = $request->all();
@@ -93,7 +120,8 @@ class UserController extends Controller
         $user->fill($data);     
         $user->save();
 
-        return redirect()->route('users');
+        //return redirect()->route('users');
+        return back();
     }
 
     /**

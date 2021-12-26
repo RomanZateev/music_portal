@@ -37,7 +37,8 @@ Route::get('/admin', 'AdminController@admin')
 //пользователи
 Route::get('/users', 'UserController@all')->name('users');
 //отображение
-Route::get('/user/{id}', 'UserController@show')->name('user');
+//Route::get('/user/{id}', 'UserController@show')->name('user');
+Route::get('/user', 'UserController@show')->name('user');
 //удаление
 Route::delete('user/delete/{user_id}', 'UserController@destroy')->name('user_delete');
 //изменение
@@ -93,3 +94,12 @@ Route::post('/song/{song_id}/artists/add', 'SongsController@add_artist')->name('
 Route::delete('song/{song_id}/artists/{artist_id}/delete', 'SongsController@delete_artist')->name('song_delete_artist');
 //поиск композиции
 Route::any('/search', 'SongsController@search')->name('search_song');
+
+
+
+/*
+|--------------------------------------------------------------------------
+| ЛАЙКИ
+|--------------------------------------------------------------------------
+*/
+Route::get('/like/{song_id}', 'SongsController@like')->name('like');

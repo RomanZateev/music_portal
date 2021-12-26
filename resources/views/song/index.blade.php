@@ -1,6 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
+
 <div class="container">
     @if ($song)
         <div class="row">
@@ -78,11 +79,20 @@
                 @if ($song->musicAuthor)
                     <div class="h4 font-weight-bold">Автор музыки: {{$song->musicAuthor}}</div>
                 @endif
-                <!--
-                <a href="" class="heart" id="{{$song->id}}">
-                    <img class="image_on" src="/storage/app/img/actions/heart.png" alt="heart">
-                    <img class="image_off" src="/storage/app/img/actions/heart-active.png" alt="heart-active">
-                </a>-->
+
+                @if (Auth::check())
+                    <form class="form-horizontal" action="{{ route('like', ['song_id'=>$song->id]) }}" method="get">
+                                {{ csrf_field() }}
+                                <button class="btn btn-light btn-lg" type="submit">
+                                <img class="image_off" src="/storage/app/img/actions/heart-active.png" alt="heart-active">
+                                Лайк: {{$likes}}</button>
+                            </form>
+                        <!-- <a href="" class="heart" id="{{$song->id}}">
+                            <img class="image_on" src="/storage/app/img/actions/heart.png" alt="heart">
+                            <img class="image_off" src="/storage/app/img/actions/heart-active.png" alt="heart-active">
+                        </a> -->
+                    </form>
+                @endif
             </div>
         </div>
         <div class="row bg-white mt-4 pt-4 rounded">

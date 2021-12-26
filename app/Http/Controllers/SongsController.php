@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Artist;
 use App\Song;
+use App\Like;
+use Auth;
 use Illuminate\Http\Request;
 
 use Illuminate\Support\Facades\DB;
@@ -59,8 +61,10 @@ class SongsController extends Controller
     {
         $song = Song::where('id', $id) -> first();
 
-        if ($song) 
-            return view('song.index', ['song' => $song, 'artists' => Artist::all()]);
+        $likes = Like::where('song_id', $id) -> count();
+
+        if ($song)
+            return view('song.index', ['song' => $song, 'artists' => Artist::all(), 'likes' => $likes]);
         else abort(404);
     }
 
@@ -107,6 +111,27 @@ class SongsController extends Controller
     {
         Song::find($id)->delete();
         return redirect()->route('songs');
+    }
+
+    public function like($song_id)
+    {
+        $user_id = Auth::id();
+
+        $like = Like::where('song_id', $song_id)->where('user_id', $user_id) -> first();
+
+        if (count($like) > 0)
+            Like::find($like -> id)->delete();
+        else
+        {
+            DB::table('likes')->insert(
+                [
+                    'song_id' => $song_id, 
+                    'user_id' => $user_id
+                ]
+            );
+        }
+
+        return back();
     }
 
 

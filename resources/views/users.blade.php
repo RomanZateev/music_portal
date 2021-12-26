@@ -44,12 +44,12 @@
                             <button class="btn btn-danger" type="submit">Удалить</button>
                         </form>
                     </div>
-                    <div class="col">
+                    <!-- <div class="col">
                         <form class="form-horizontal" action="{{ route('user_edit',['user_id'=>$user->id]) }}" method="get">
                             {{ csrf_field() }}
                             <button class="btn btn-warning" type="submit">Редактировать</button>
                         </form>
-                    </div>
+                    </div> -->
                 </div>
         @endforeach
 

@@ -107,11 +107,11 @@
                         <!-- Authentication Links -->
                         @guest
                             <li class="nav-item">
-                                <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
+                                <a class="nav-link" href="{{ route('login') }}">{{ __('Войти') }}</a>
                             </li>
                             @if (Route::has('register'))
                                 <li class="nav-item">
-                                    <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
+                                    <a class="nav-link" href="{{ route('register') }}">{{ __('Зарегистрироваться') }}</a>
                                 </li>
                             @endif
                         @else
@@ -124,9 +124,11 @@
                                     <a class="dropdown-item" href="{{ route('logout') }}"
                                        onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
-                                        {{ __('Logout') }}
+                                        {{ __('Выйти') }}
                                     </a>
-
+                                    <a class="dropdown-item" href="{{ route('user') }}">
+                                        {{ __('Личный кабинет') }}
+                                    </a>
                                     <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                                         @csrf
                                     </form>
@@ -144,7 +146,7 @@
 
         <footer class="py-4 mt-4 text-black-50 bg-info">
             <div class="container text-center">
-                <a href="https://vk.com/traphustler" class="h5 nounderline text-dark"> 2019 Roman: VK.com</a>
+                <a href="https://vk.com/r_zateev" class="h5 nounderline text-dark"> 2021 Roman Zateev</a>
             </div>
         </footer>
     </div>
